@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Member {
+  id               String   @id @default(cuid())
+  fullName         String
+  birthDate             String?
+  birthDateType         String?  @default("solar") // "solar" | "lunar"
+  deathDate             String?
+  deathDateType         String?  @default("solar") // "solar" | "lunar"
+  isAlive               Boolean  @default(true)
+  gender                String   // "male" | "female"
+  generation            Int      @default(1)
+  birthOrder            Int      @default(1)
+  occupation            String?
+  address               String?
+  biography             String?
+  graveInfo             String?
+  deathAnniversary      String?
+  deathAnniversaryType  String?  @default("lunar") // "solar" | "lunar"
+  notes                 String?
+  photoUrl         String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  parentChildAsChild  ParentChild[] @relation("ChildRelation")
+  parentChildAsParent ParentChild[] @relation("ParentRelation")
+  marriagesAsSpouse1  Marriage[]    @relation("Spouse1Relation")
+  marriagesAsSpouse2  Marriage[]    @relation("Spouse2Relation")
+  events              Event[]
+  photos              Photo[]
+
+  @@index([generation])
+  @@index([fullName])
+}
+
+model ParentChild {
+  id               String @id @default(cuid())
+  parentId         String
+  childId          String
+  relationshipType String @default("biological")
+
+  parent Member @relation("ParentRelation", fields: [parentId], references: [id], onDelete: Cascade)
+  child  Member @relation("ChildRelation", fields: [childId], references: [id], onDelete: Cascade)
+
+  @@unique([parentId, childId])
+  @@index([parentId])
+  @@index([childId])
+}
+
+model Marriage {
+  id           String  @id @default(cuid())
+  spouse1Id    String
+  spouse2Id    String
+  marriageDate String?
+  divorceDate  String?
+  isActive     Boolean @default(true)
+  orderIndex   Int     @default(1)
+
+  spouse1 Member @relation("Spouse1Relation", fields: [spouse1Id], references: [id], onDelete: Cascade)
+  spouse2 Member @relation("Spouse2Relation", fields: [spouse2Id], references: [id], onDelete: Cascade)
+
+  @@unique([spouse1Id, spouse2Id])
+  @@index([spouse1Id])
+  @@index([spouse2Id])
+}
+
+model Event {
+  id           String   @id @default(cuid())
+  memberId     String
+  title        String
+  date         String?
+  calendarType String?  @default("solar") // "solar" | "lunar"
+  description  String?
+  createdAt    DateTime @default(now())
+
+  member Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@index([memberId])
+}
+
+model Photo {
+  id        String   @id @default(cuid())
+  memberId  String
+  url       String
+  caption   String?
+  isProfile Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  member Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@index([memberId])
+}

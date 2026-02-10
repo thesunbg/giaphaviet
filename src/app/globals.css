@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --background: #faf9f6;
+  --foreground: #1a1a1a;
+  --primary: #8b4513;
+  --primary-light: #d2a679;
+  --accent: #c9a96e;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-accent: var(--accent);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Be Vietnam Pro", Arial, Helvetica, sans-serif;
+}
+
+/* Tree connector lines */
+.tree-connector-v {
+  width: 2px;
+  background-color: #8b4513;
+}
+
+.tree-connector-h {
+  height: 2px;
+  background-color: #8b4513;
+}
+
+.tree-spouse-connector {
+  width: 24px;
+  height: 2px;
+  background-color: #c9a96e;
+  position: relative;
+}
+
+.tree-spouse-connector::before,
+.tree-spouse-connector::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #c9a96e;
+}
+
+.tree-spouse-connector::before {
+  top: -3px;
+}
+
+.tree-spouse-connector::after {
+  top: 3px;
+}
+
+/* Adopted child style */
+.adopted-border {
+  border-style: dashed !important;
+}
+
+/* Deceased member style */
+.deceased-overlay {
+  opacity: 0.7;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9a96e;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8b4513;
+}

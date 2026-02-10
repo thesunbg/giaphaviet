@@ -1,0 +1,1191 @@
+{
+  "familyName": "Họ Nguyễn - Cụ tổ Nguyễn Công Tự Phúc Định",
+  "root": {
+    "fullName": "Nguyễn Công Tự Phúc Định",
+    "gender": "male",
+    "generation": 1,
+    "birthOrder": 1,
+    "isAlive": false,
+    "notes": "Cụ tổ dòng họ Nguyễn",
+    "children": [
+      {
+        "fullName": "Nguyễn Trực Yên",
+        "gender": "male",
+        "generation": 2,
+        "birthOrder": 1,
+        "isAlive": false,
+        "children": [
+          {
+            "fullName": "Nguyễn Phú Quý",
+            "gender": "male",
+            "generation": 3,
+            "birthOrder": 1,
+            "isAlive": false,
+            "children": [
+              {
+                "fullName": "Nguyễn Văn Nhâm",
+                "gender": "male",
+                "generation": 4,
+                "birthOrder": 1,
+                "isAlive": false,
+                "children": [
+                  {
+                    "fullName": "Nguyễn Văn Trí",
+                    "gender": "male",
+                    "generation": 5,
+                    "birthOrder": 1,
+                    "isAlive": false,
+                    "children": [
+                      {
+                        "fullName": "Nguyễn Thị Chí",
+                        "gender": "female",
+                        "generation": 6,
+                        "birthOrder": 1,
+                        "isAlive": false,
+                        "notes": "Chồng là ...",
+                        "children": [
+                          { "fullName": "Lê Văn Đán", "gender": "male", "generation": 7, "birthOrder": 1, "isAlive": false },
+                          { "fullName": "Lê Văn Huệ", "gender": "male", "generation": 7, "birthOrder": 2, "isAlive": false },
+                          { "fullName": "Lê Thị Huế", "gender": "female", "generation": 7, "birthOrder": 3, "isAlive": false }
+                        ]
+                      },
+                      {
+                        "fullName": "Nguyễn Văn Đông",
+                        "gender": "male",
+                        "generation": 6,
+                        "birthOrder": 2,
+                        "isAlive": false,
+                        "spouses": [
+                          { "fullName": "Nguyễn Thị Hoán", "gender": "female", "isAlive": false, "notes": "Vợ cả", "orderIndex": 1 },
+                          { "fullName": "Trịnh Thị Chư", "gender": "female", "isAlive": false, "notes": "Vợ hai", "orderIndex": 2 }
+                        ],
+                        "children": [
+                          {
+                            "fullName": "Nguyễn Văn Bắc",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 1,
+                            "isAlive": false,
+                            "notes": "Con bà Hoán (vợ cả)",
+                            "children": [
+                              { "fullName": "Nguyễn Văn Liêu", "gender": "male", "generation": 8, "birthOrder": 1, "isAlive": false, "notes": "Liệt sĩ chống Mỹ" },
+                              {
+                                "fullName": "Nguyễn Văn Liu",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 2,
+                                "isAlive": false,
+                                "spouses": [{ "fullName": "Lê Thị Bùi", "gender": "female", "isAlive": false, "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Luyến", "gender": "female", "generation": 9, "birthOrder": 1, "notes": "Đi nam làm ăn" },
+                                  { "fullName": "Nguyễn Thị Tuyến", "gender": "female", "generation": 9, "birthOrder": 2, "notes": "Lấy chồng trong Voi, Quỳnh Sơn" },
+                                  {
+                                    "fullName": "Nguyễn Văn Phong",
+                                    "gender": "male",
+                                    "generation": 9,
+                                    "birthOrder": 3,
+                                    "spouses": [{ "fullName": "Nguyễn Thị Lan", "gender": "female", "orderIndex": 1 }],
+                                    "children": [
+                                      { "fullName": "Nguyễn Văn Toàn", "gender": "male", "generation": 10, "birthOrder": 1, "birthDate": "2009" },
+                                      { "fullName": "Nguyễn Văn Thắng", "gender": "male", "generation": 10, "birthOrder": 2, "birthDate": "2013" }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Bình",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 3,
+                                "isAlive": false,
+                                "spouses": [
+                                  { "fullName": "Nguyễn Thị Thao", "gender": "female", "isAlive": false, "deathDate": "17/07/2010 âm lịch", "orderIndex": 1 },
+                                  { "fullName": "Chị Phượng", "gender": "female", "notes": "Vợ hai", "orderIndex": 2 }
+                                ],
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Thuý", "gender": "female", "generation": 9, "birthOrder": 1, "notes": "Chồng Nguyễn Văn Nội" },
+                                  { "fullName": "Nguyễn Văn Thuỳ", "gender": "male", "generation": 9, "birthOrder": 2 },
+                                  { "fullName": "Nguyễn Văn Thanh", "gender": "male", "generation": 9, "birthOrder": 3 },
+                                  { "fullName": "Nguyễn Thị Trang", "gender": "female", "generation": 9, "birthOrder": 4, "birthDate": "2012", "notes": "Con chị Phượng vợ hai" }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Thị Tĩnh",
+                                "gender": "female",
+                                "generation": 8,
+                                "birthOrder": 4,
+                                "notes": "Đi miền nam xây dựng kinh tế mới",
+                                "spouses": [{ "fullName": "Tạ Văn Xuân", "gender": "male", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Tạ Văn Ba", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Tạ Văn Duy", "gender": "male", "generation": 9, "birthOrder": 2 },
+                                  { "fullName": "Tạ Văn Nhất", "gender": "male", "generation": 9, "birthOrder": 3 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Thị Liễu",
+                                "gender": "female",
+                                "generation": 8,
+                                "birthOrder": 5,
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Tuyên", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Văn Huấn", "gender": "male", "generation": 9, "birthOrder": 2 },
+                                  { "fullName": "Nguyễn Văn Luyện", "gender": "male", "generation": 9, "birthOrder": 3 },
+                                  { "fullName": "Nguyễn Văn Chiến", "gender": "male", "generation": 9, "birthOrder": 4 },
+                                  { "fullName": "Nguyễn Thị Thắng", "gender": "female", "generation": 9, "birthOrder": 5 }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Thị Sâm",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 2,
+                            "isAlive": false,
+                            "spouses": [{ "fullName": "Đỗ Văn Sầm", "gender": "male", "isAlive": false, "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Đỗ Văn San", "gender": "male", "generation": 8, "birthOrder": 1 },
+                              { "fullName": "Đỗ Văn Sẻ", "gender": "male", "generation": 8, "birthOrder": 2 },
+                              { "fullName": "Đỗ Văn An", "gender": "male", "generation": 8, "birthOrder": 3 },
+                              { "fullName": "Đỗ Thị Lý", "gender": "female", "generation": 8, "birthOrder": 4 }
+                            ]
+                          },
+                          { "fullName": "Nguyễn Thị Nhung", "gender": "female", "generation": 7, "birthOrder": 3, "isAlive": false, "notes": "Tàn tật, không có con" },
+                          {
+                            "fullName": "Nguyễn Thị Quế",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 4,
+                            "isAlive": false,
+                            "spouses": [{ "fullName": "Lê Văn Thuỷ", "gender": "male", "isAlive": false, "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Lê Văn Ngân", "gender": "male", "generation": 8, "birthOrder": 1 },
+                              { "fullName": "Lê Văn Sách", "gender": "male", "generation": 8, "birthOrder": 2 },
+                              { "fullName": "Lê Thị Tài", "gender": "female", "generation": 8, "birthOrder": 3 },
+                              { "fullName": "Lê Văn Chính", "gender": "male", "generation": 8, "birthOrder": 4 },
+                              { "fullName": "Lê Thị Chuyên", "gender": "female", "generation": 8, "birthOrder": 5 },
+                              { "fullName": "Lê Thị Bé", "gender": "female", "generation": 8, "birthOrder": 6 }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Thị Hồi",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 5,
+                            "isAlive": false,
+                            "spouses": [{ "fullName": "Tạ Văn Phác", "gender": "male", "isAlive": false, "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Nguyễn Văn Giang", "gender": "male", "generation": 8, "birthOrder": 1 },
+                              { "fullName": "Nguyễn Thị Thanh", "gender": "female", "generation": 8, "birthOrder": 2 }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Văn Hương",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 6,
+                            "birthDate": "1942",
+                            "isAlive": false,
+                            "spouses": [{ "fullName": "Lê Thị Rịu", "gender": "female", "birthDate": "1943", "orderIndex": 1 }],
+                            "children": [
+                              {
+                                "fullName": "Nguyễn Văn Chiến",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 1,
+                                "birthDate": "1976",
+                                "spouses": [{ "fullName": "Nguyễn Thị Sơn", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Chinh", "gender": "female", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Thị Oanh", "gender": "female", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Thắng",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 2,
+                                "spouses": [{ "fullName": "Nguyễn Thị Huyền", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Vy", "gender": "female", "generation": 9, "birthOrder": 1 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Miền",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 3,
+                                "birthDate": "1983",
+                                "spouses": [{ "fullName": "Nguyễn Thị Phương", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Duy", "gender": "male", "generation": 9, "birthOrder": 1 }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Thị Chi",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 7,
+                            "notes": "Con bà Chư (vợ hai)",
+                            "spouses": [{ "fullName": "Nguyễn Văn Trúc", "gender": "male", "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Nguyễn Văn Trường", "gender": "male", "generation": 8, "birthOrder": 1 }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Văn Tiêu",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 8,
+                            "isAlive": false,
+                            "spouses": [{ "fullName": "Nguyễn Thị Phú", "gender": "female", "isAlive": false, "orderIndex": 1 }],
+                            "children": [
+                              {
+                                "fullName": "Nguyễn Thị Hoan",
+                                "gender": "female",
+                                "generation": 8,
+                                "birthOrder": 1,
+                                "birthDate": "1961",
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Huế", "gender": "female", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Văn Thế", "gender": "male", "generation": 9, "birthOrder": 2, "birthDate": "1986" },
+                                  { "fullName": "Nguyễn Thị Vững", "gender": "female", "generation": 9, "birthOrder": 3, "birthDate": "1988" },
+                                  { "fullName": "Nguyễn Thị Bền", "gender": "female", "generation": 9, "birthOrder": 4 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Hiếu",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 2,
+                                "birthDate": "1964",
+                                "spouses": [{ "fullName": "Nguyễn Thị Hoà", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Lệ", "gender": "female", "generation": 9, "birthOrder": 1, "birthDate": "1990" },
+                                  { "fullName": "Nguyễn Văn Đạt", "gender": "male", "generation": 9, "birthOrder": 2, "birthDate": "1999" }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Thảo",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 3,
+                                "birthDate": "1967",
+                                "spouses": [{ "fullName": "Phạm Thị Lan", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Sơn", "gender": "male", "generation": 9, "birthOrder": 1, "birthDate": "1986" },
+                                  { "fullName": "Nguyễn Văn Đô", "gender": "male", "generation": 9, "birthOrder": 2, "birthDate": "1988" }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Thị Huệ",
+                                "gender": "female",
+                                "generation": 8,
+                                "birthOrder": 4,
+                                "birthDate": "1969",
+                                "spouses": [{ "fullName": "Dương Đình Long", "gender": "male", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Dương Đình Đức", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Dương Thị Hiền", "gender": "female", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Thị Lan",
+                                "gender": "female",
+                                "generation": 8,
+                                "birthOrder": 5,
+                                "birthDate": "1971",
+                                "spouses": [{ "fullName": "Lê Văn Thêm", "gender": "male", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Lê Văn Tiến", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Lê Văn Toàn", "gender": "male", "generation": 9, "birthOrder": 2 }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "fullName": "Nguyễn Văn Viên",
+                        "gender": "male",
+                        "generation": 6,
+                        "birthOrder": 3,
+                        "isAlive": false,
+                        "spouses": [
+                          { "fullName": "Tạ Thị Hợi", "gender": "female", "isAlive": false, "notes": "Vợ cả", "orderIndex": 1 },
+                          { "fullName": "Lê Thị Nhiên", "gender": "female", "isAlive": false, "notes": "Vợ hai", "orderIndex": 2 }
+                        ],
+                        "children": [
+                          {
+                            "fullName": "Nguyễn Văn Chức",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 1,
+                            "isAlive": false,
+                            "spouses": [{ "fullName": "Nguyễn Thị Ruộng", "gender": "female", "isAlive": false, "orderIndex": 1 }],
+                            "children": [
+                              {
+                                "fullName": "Nguyễn Văn Phức",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 1,
+                                "notes": "Sống trong miền nam",
+                                "spouses": [{ "fullName": "Lê Thị Đỗ", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  {
+                                    "fullName": "Nguyễn Văn Sơn",
+                                    "gender": "male",
+                                    "generation": 9,
+                                    "birthOrder": 1,
+                                    "children": [
+                                      { "fullName": "Nguyễn Văn Khôi Nguyên", "gender": "male", "generation": 10, "birthOrder": 1 },
+                                      { "fullName": "Nguyễn Thị Nhật Phương", "gender": "female", "generation": 10, "birthOrder": 2 }
+                                    ]
+                                  },
+                                  { "fullName": "Nguyễn Thị Thương", "gender": "female", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Thị Thuận",
+                                "gender": "female",
+                                "generation": 8,
+                                "birthOrder": 2,
+                                "spouses": [{ "fullName": "Nguyễn Văn Tiến", "gender": "male", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Dũng", "gender": "male", "generation": 9, "birthOrder": 1 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Thị Tình",
+                                "gender": "female",
+                                "generation": 8,
+                                "birthOrder": 3,
+                                "notes": "Ở trong Đồng Nai",
+                                "spouses": [{ "fullName": "Nguyễn Thái Minh", "gender": "male", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Tùng", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Văn Tâm", "gender": "male", "generation": 9, "birthOrder": 2 },
+                                  { "fullName": "Nguyễn Thái Đức", "gender": "male", "generation": 9, "birthOrder": 3 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Độ",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 4,
+                                "spouses": [{ "fullName": "Nguyễn Thị Chuyên", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Trang", "gender": "female", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Văn Ngọc", "gender": "male", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Bộ",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 5,
+                                "notes": "Sống trong miền nam",
+                                "spouses": [
+                                  { "fullName": "Lê Thị Thái", "gender": "female", "notes": "Vợ cả", "orderIndex": 1 },
+                                  { "fullName": "Nguyễn Thị Thảo", "gender": "female", "notes": "Vợ hai", "orderIndex": 2 }
+                                ],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Tuấn", "gender": "male", "generation": 9, "birthOrder": 1, "notes": "Con vợ cả" }
+                                ]
+                              }
+                            ]
+                          },
+                          { "fullName": "Nguyễn Văn Sự", "gender": "male", "generation": 7, "birthOrder": 2, "isAlive": false, "notes": "Liệt sĩ chống Pháp" },
+                          {
+                            "fullName": "Nguyễn Thị Ngữ",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 3,
+                            "isAlive": false,
+                            "spouses": [{ "fullName": "Lê Văn Vỵ", "gender": "male", "isAlive": false, "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Nguyễn Thị Chắt", "gender": "female", "generation": 8, "birthOrder": 1 },
+                              { "fullName": "Lê Thị Ấn", "gender": "female", "generation": 8, "birthOrder": 2 },
+                              { "fullName": "Lê Văn Tấn", "gender": "male", "generation": 8, "birthOrder": 3 },
+                              { "fullName": "Lê Văn Công", "gender": "male", "generation": 8, "birthOrder": 4 },
+                              { "fullName": "Lê Thị Kiên", "gender": "female", "generation": 8, "birthOrder": 5 },
+                              { "fullName": "Lê Thị Quyết", "gender": "female", "generation": 8, "birthOrder": 6 }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Thị Ngan",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 4,
+                            "isAlive": false,
+                            "spouses": [{ "fullName": "Nguyễn Văn Tiến", "gender": "male", "isAlive": false, "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Nguyễn Văn Toàn", "gender": "male", "generation": 8, "birthOrder": 1 },
+                              { "fullName": "Nguyễn Văn Thể", "gender": "male", "generation": 8, "birthOrder": 2 },
+                              { "fullName": "Nguyễn Văn Thi", "gender": "male", "generation": 8, "birthOrder": 3 },
+                              { "fullName": "Nguyễn Thị Hương", "gender": "female", "generation": 8, "birthOrder": 4 }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Văn Ngôn",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 5,
+                            "isAlive": false,
+                            "notes": "Liệt sĩ chống Mỹ",
+                            "spouses": [{ "fullName": "Nguyễn Thị Hiếm", "gender": "female", "isAlive": false, "orderIndex": 1 }],
+                            "children": [
+                              {
+                                "fullName": "Nguyễn Văn Luận",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 1,
+                                "spouses": [{ "fullName": "Nguyễn Thị Thư", "gender": "female", "orderIndex": 1 }]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Thành",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 2,
+                                "spouses": [{ "fullName": "Nguyễn Thị Khanh", "gender": "female", "orderIndex": 1 }]
+                              },
+                              { "fullName": "Nguyễn Thị Lan", "gender": "female", "generation": 8, "birthOrder": 3 }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Văn Lập",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 6,
+                            "isAlive": false,
+                            "notes": "Con bà Lê Thị Nhiên (vợ hai)",
+                            "children": [
+                              { "fullName": "Nguyễn Thị Trường", "gender": "female", "generation": 8, "birthOrder": 1 },
+                              { "fullName": "Nguyễn Thị Thắm", "gender": "female", "generation": 8, "birthOrder": 2 },
+                              { "fullName": "Nguyễn Thị Tươi", "gender": "female", "generation": 8, "birthOrder": 3 }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "fullName": "Nguyễn Thị Ngòng",
+                    "gender": "female",
+                    "generation": 5,
+                    "birthOrder": 2,
+                    "isAlive": false,
+                    "children": [
+                      { "fullName": "Bà Ngòi", "gender": "female", "generation": 6, "birthOrder": 1, "isAlive": false, "notes": "Không có chồng con" },
+                      {
+                        "fullName": "Bà Lạch",
+                        "gender": "female",
+                        "generation": 6,
+                        "birthOrder": 2,
+                        "isAlive": false,
+                        "notes": "Lấy chồng làng Đống Thắm, xã Cảnh Thuỵ Yên Dũng",
+                        "children": [
+                          { "fullName": "Nguyễn Văn Sông", "gender": "male", "generation": 7, "birthOrder": 1, "isAlive": false },
+                          { "fullName": "Nguyễn Văn Pha", "gender": "male", "generation": 7, "birthOrder": 2, "isAlive": false }
+                        ]
+                      },
+                      {
+                        "fullName": "Bà Bánh",
+                        "gender": "female",
+                        "generation": 6,
+                        "birthOrder": 3,
+                        "isAlive": false,
+                        "children": [
+                          { "fullName": "Lê Thị Mỹ", "gender": "female", "generation": 7, "birthOrder": 1, "isAlive": false, "notes": "Chồng là Đản, xóm Tân Mỹ" },
+                          { "fullName": "Lê Văn Thìn", "gender": "male", "generation": 7, "birthOrder": 2, "isAlive": false },
+                          { "fullName": "Lê Văn Sang", "gender": "male", "generation": 7, "birthOrder": 3, "isAlive": false },
+                          { "fullName": "Lê Văn Trọng", "gender": "male", "generation": 7, "birthOrder": 4, "isAlive": false },
+                          { "fullName": "Lê Thị Cảnh", "gender": "female", "generation": 7, "birthOrder": 5, "isAlive": false }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "fullName": "Nguyễn Văn Hạnh",
+                    "gender": "male",
+                    "generation": 5,
+                    "birthOrder": 3,
+                    "isAlive": false,
+                    "spouses": [{ "fullName": "Nguyễn Thị Thơ", "gender": "female", "isAlive": false, "orderIndex": 1 }],
+                    "children": [
+                      {
+                        "fullName": "Nguyễn Văn Nguyên",
+                        "gender": "male",
+                        "generation": 6,
+                        "birthOrder": 1,
+                        "isAlive": false,
+                        "spouses": [
+                          { "fullName": "Bà cả (không rõ tên)", "gender": "female", "isAlive": false, "notes": "Vợ cả", "orderIndex": 1 },
+                          { "fullName": "Lê Thị Cam", "gender": "female", "isAlive": false, "notes": "Vợ hai", "orderIndex": 2 }
+                        ],
+                        "children": [
+                          {
+                            "fullName": "Nguyễn Văn Xuý",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 1,
+                            "isAlive": false,
+                            "notes": "Con vợ cả",
+                            "children": [
+                              {
+                                "fullName": "Nguyễn Văn Vân",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 1,
+                                "spouses": [{ "fullName": "Nguyễn Thị Nga", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Liên", "gender": "female", "generation": 9, "birthOrder": 1, "notes": "Lấy chồng ở Bắc Giang" },
+                                  { "fullName": "Nguyễn Văn Đức", "gender": "male", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Thị Thanh",
+                                "gender": "female",
+                                "generation": 8,
+                                "birthOrder": 2,
+                                "spouses": [{ "fullName": "Nguyễn Văn Chuyên", "gender": "male", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Chính", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Thị Thái", "gender": "female", "generation": 9, "birthOrder": 2, "notes": "Lấy chồng Thanh Hoá" }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Thị Long",
+                                "gender": "female",
+                                "generation": 8,
+                                "birthOrder": 3,
+                                "spouses": [{ "fullName": "Nguyễn Văn Hưng", "gender": "male", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Tùng", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Văn Giang", "gender": "male", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Biên",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 4,
+                                "spouses": [{ "fullName": "Nguyễn Thị Liên", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Thuỳ Tiên", "gender": "female", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Văn Kiên", "gender": "male", "generation": 9, "birthOrder": 2 }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Văn Hoàn",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 2,
+                            "isAlive": false,
+                            "notes": "Con vợ cả",
+                            "spouses": [
+                              { "fullName": "Bà cả (ông Hoàn)", "gender": "female", "isAlive": false, "orderIndex": 1 },
+                              { "fullName": "Nguyễn Thị Nghi", "gender": "female", "notes": "Vợ hai, trú quán Chí Linh, Hải Dương", "orderIndex": 2 }
+                            ],
+                            "children": [
+                              {
+                                "fullName": "Nguyễn Văn Luân",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 1,
+                                "notes": "Con vợ cả",
+                                "spouses": [{ "fullName": "Trịnh Thị Chiến", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Dung", "gender": "female", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Văn Hùng", "gender": "male", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Lương",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 2,
+                                "notes": "Con vợ cả",
+                                "spouses": [{ "fullName": "Nguyễn Thị Hằng", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Tâm", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Thị Tình", "gender": "female", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Thị Phương",
+                                "gender": "female",
+                                "generation": 8,
+                                "birthOrder": 3,
+                                "notes": "Con vợ cả",
+                                "spouses": [{ "fullName": "Nguyễn Văn Hùng", "gender": "male", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Dũng", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Thị Giang", "gender": "female", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              { "fullName": "Nguyễn Thị Huyên", "gender": "female", "generation": 8, "birthOrder": 4, "notes": "Con vợ hai, lấy chồng Thanh Hoá" },
+                              { "fullName": "Nguyễn Văn Hiệp", "gender": "male", "generation": 8, "birthOrder": 5, "notes": "Con vợ hai" }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Thị Thành",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 3,
+                            "isAlive": false,
+                            "notes": "Con vợ cả, lấy chồng xóm Cả Dũng",
+                            "children": [
+                              { "fullName": "Nguyễn Văn Doanh", "gender": "male", "generation": 8, "birthOrder": 1 },
+                              { "fullName": "Nguyễn Văn Dũng", "gender": "male", "generation": 8, "birthOrder": 2 },
+                              { "fullName": "Nguyễn Văn Quyết", "gender": "male", "generation": 8, "birthOrder": 3 },
+                              { "fullName": "Nguyễn Thị Mai Anh", "gender": "female", "generation": 8, "birthOrder": 4 }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Thị Tỉnh",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 4,
+                            "notes": "Con vợ hai, lấy chồng cùng xã",
+                            "spouses": [{ "fullName": "Nguyễn Văn Sửu", "gender": "male", "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Nguyễn Thị Mai", "gender": "female", "generation": 8, "birthOrder": 1 },
+                              { "fullName": "Nguyễn Văn Phượng", "gender": "male", "generation": 8, "birthOrder": 2 },
+                              { "fullName": "Nguyễn Văn Phong", "gender": "male", "generation": 8, "birthOrder": 3 },
+                              { "fullName": "Nguyễn Văn Phú", "gender": "male", "generation": 8, "birthOrder": 4 }
+                            ]
+                          },
+                          { "fullName": "Nguyễn Thị Hải", "gender": "female", "generation": 7, "birthOrder": 5, "notes": "Con vợ hai, lấy chồng xã Quỳnh Sơn" },
+                          {
+                            "fullName": "Nguyễn Thị Dương",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 6,
+                            "notes": "Con vợ hai",
+                            "spouses": [{ "fullName": "Lê Văn Vui", "gender": "male", "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Lê Văn Trung", "gender": "male", "generation": 8, "birthOrder": 1 },
+                              { "fullName": "Lê Văn Hiếu", "gender": "male", "generation": 8, "birthOrder": 2 },
+                              { "fullName": "Lê Thị Huệ", "gender": "female", "generation": 8, "birthOrder": 3 }
+                            ]
+                          }
+                        ]
+                      },
+                      { "fullName": "Nguyễn Thị Xuyên", "gender": "female", "generation": 6, "birthOrder": 2, "isAlive": false }
+                    ]
+                  },
+                  {
+                    "fullName": "Nguyễn Thị Triệu",
+                    "gender": "female",
+                    "generation": 5,
+                    "birthOrder": 4,
+                    "isAlive": false,
+                    "children": [
+                      {
+                        "fullName": "Lê Văn Duyệt",
+                        "gender": "male",
+                        "generation": 6,
+                        "birthOrder": 1,
+                        "isAlive": false,
+                        "children": [
+                          { "fullName": "Lê Thị Được", "gender": "female", "generation": 7, "birthOrder": 1, "isAlive": false }
+                        ]
+                      },
+                      {
+                        "fullName": "Lê Văn Thuyết",
+                        "gender": "male",
+                        "generation": 6,
+                        "birthOrder": 2,
+                        "isAlive": false,
+                        "children": [
+                          { "fullName": "Lê Văn Bình", "gender": "male", "generation": 7, "birthOrder": 1, "isAlive": false }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "fullName": "Nguyễn Văn Thắng",
+                    "gender": "male",
+                    "generation": 5,
+                    "birthOrder": 5,
+                    "isAlive": false,
+                    "notes": "Thường gọi là cụ Xuyền",
+                    "children": [
+                      { "fullName": "Nguyễn Thị Xuyền", "gender": "female", "generation": 6, "birthOrder": 1, "isAlive": false, "notes": "Chồng Trịnh Văn Dưỡng" },
+                      { "fullName": "Nguyễn Thị Kha", "gender": "female", "generation": 6, "birthOrder": 2, "isAlive": false, "deathDate": "1970", "notes": "Chồng Lê Văn Minh" }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "fullName": "Nguyễn Văn Luất",
+        "gender": "male",
+        "generation": 2,
+        "birthOrder": 2,
+        "isAlive": false,
+        "children": [
+          { "fullName": "Nguyễn Văn Chuất", "gender": "male", "generation": 3, "birthOrder": 1, "isAlive": false },
+          { "fullName": "Nguyễn Văn Luân", "gender": "male", "generation": 3, "birthOrder": 2, "isAlive": false },
+          {
+            "fullName": "Nguyễn Thị Thuật",
+            "gender": "female",
+            "generation": 3,
+            "birthOrder": 3,
+            "isAlive": false,
+            "children": [
+              {
+                "fullName": "Nguyễn Thị Cao",
+                "gender": "female",
+                "generation": 4,
+                "birthOrder": 1,
+                "isAlive": false,
+                "children": [
+                  { "fullName": "Lê Văn Vỵ", "gender": "male", "generation": 5, "birthOrder": 1, "isAlive": false }
+                ]
+              },
+              {
+                "fullName": "Nguyễn Văn Ngôi",
+                "gender": "male",
+                "generation": 4,
+                "birthOrder": 2,
+                "isAlive": false,
+                "children": [
+                  { "fullName": "Nguyễn Văn Hoàn", "gender": "male", "generation": 5, "birthOrder": 1, "isAlive": false }
+                ]
+              },
+              {
+                "fullName": "Nguyễn Văn Thô",
+                "gender": "male",
+                "generation": 4,
+                "birthOrder": 3,
+                "isAlive": false,
+                "children": [
+                  { "fullName": "Nguyễn Thị Thắm", "gender": "female", "generation": 5, "birthOrder": 1, "isAlive": false, "notes": "Con gái cả" }
+                ]
+              },
+              {
+                "fullName": "Nguyễn Thị Xướng",
+                "gender": "female",
+                "generation": 4,
+                "birthOrder": 4,
+                "isAlive": false,
+                "children": [
+                  { "fullName": "Lê Ngọc Xếp", "gender": "male", "generation": 5, "birthOrder": 1, "isAlive": false, "notes": "Con trai cả" }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "fullName": "Nguyễn Văn Trò",
+        "gender": "male",
+        "generation": 2,
+        "birthOrder": 3,
+        "isAlive": false,
+        "notes": "Gia đình đem con đi nơi khác làm ăn, không rõ tin tức",
+        "children": [
+          {
+            "fullName": "Nguyễn Văn Trổ",
+            "gender": "male",
+            "generation": 3,
+            "birthOrder": 1,
+            "isAlive": false,
+            "children": [
+              { "fullName": "Nguyễn Văn Hỗ", "gender": "male", "generation": 4, "birthOrder": 1, "isAlive": false },
+              { "fullName": "Nguyễn Văn Vinh", "gender": "male", "generation": 4, "birthOrder": 2, "isAlive": false },
+              { "fullName": "Nguyễn Văn Gòng", "gender": "male", "generation": 4, "birthOrder": 3, "isAlive": false }
+            ]
+          }
+        ]
+      },
+      {
+        "fullName": "Nguyễn Pháp Công",
+        "gender": "male",
+        "generation": 2,
+        "birthOrder": 4,
+        "isAlive": false,
+        "spouses": [{ "fullName": "Nguyễn Thị Tuệ", "gender": "female", "isAlive": false, "orderIndex": 1 }],
+        "children": [
+          {
+            "fullName": "Nguyễn Phúc Học",
+            "gender": "male",
+            "generation": 3,
+            "birthOrder": 1,
+            "isAlive": false,
+            "spouses": [{ "fullName": "Tạ Thị Nhường", "gender": "female", "isAlive": false, "orderIndex": 1 }],
+            "children": [
+              {
+                "fullName": "Nguyễn Phúc Khang",
+                "gender": "male",
+                "generation": 4,
+                "birthOrder": 1,
+                "isAlive": false,
+                "notes": "Gia đình đem con đi làm ăn nơi khác, không còn tin tức",
+                "spouses": [{ "fullName": "Tạ Thị Thẩm", "gender": "female", "isAlive": false, "orderIndex": 1 }],
+                "children": [
+                  { "fullName": "Nguyễn Thị Cậm", "gender": "female", "generation": 5, "birthOrder": 1, "isAlive": false },
+                  { "fullName": "Nguyễn Thị Trọng", "gender": "female", "generation": 5, "birthOrder": 2, "isAlive": false },
+                  { "fullName": "Nguyễn Văn Diện", "gender": "male", "generation": 5, "birthOrder": 3, "isAlive": false }
+                ]
+              },
+              {
+                "fullName": "Nguyễn Phúc Kha",
+                "gender": "male",
+                "generation": 4,
+                "birthOrder": 2,
+                "isAlive": false,
+                "spouses": [{ "fullName": "Trần Thị Trố", "gender": "female", "isAlive": false, "orderIndex": 1 }],
+                "children": [
+                  {
+                    "fullName": "Nguyễn Văn Hê",
+                    "gender": "male",
+                    "generation": 5,
+                    "birthOrder": 1,
+                    "isAlive": false,
+                    "birthDate": "1874",
+                    "deathDate": "1909",
+                    "spouses": [{ "fullName": "Lê Thị Bì", "gender": "female", "isAlive": false, "notes": "Về chi nhà ông Khoa Thênh", "orderIndex": 1 }],
+                    "children": [
+                      {
+                        "fullName": "Nguyễn Văn Hy",
+                        "gender": "male",
+                        "generation": 6,
+                        "birthOrder": 1,
+                        "isAlive": false,
+                        "children": [
+                          {
+                            "fullName": "Nguyễn Thị Khi",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 1,
+                            "isAlive": false,
+                            "spouses": [{ "fullName": "Nguyễn Văn Trọng", "gender": "male", "isAlive": false, "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Xuân", "gender": "male", "generation": 8, "birthOrder": 1, "isAlive": false, "notes": "Liệt sĩ chống Mỹ" },
+                              { "fullName": "Nguyễn Văn Hạ", "gender": "male", "generation": 8, "birthOrder": 2 },
+                              { "fullName": "Nguyễn Văn Thu", "gender": "male", "generation": 8, "birthOrder": 3 },
+                              { "fullName": "Nguyễn Thị Tĩnh", "gender": "female", "generation": 8, "birthOrder": 4 }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Văn Xưa",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 2,
+                            "spouses": [{ "fullName": "Nguyễn Thị Út", "gender": "female", "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Nguyễn Văn Dũng", "gender": "male", "generation": 8, "birthOrder": 1 },
+                              { "fullName": "Nguyễn Văn Tiến", "gender": "male", "generation": 8, "birthOrder": 2 }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "fullName": "Nguyễn Văn Hão",
+                        "gender": "male",
+                        "generation": 6,
+                        "birthOrder": 2,
+                        "isAlive": false,
+                        "spouses": [
+                          { "fullName": "Lê Thị Chế", "gender": "female", "isAlive": false, "notes": "Vợ cả", "orderIndex": 1 },
+                          { "fullName": "Nguyễn Thị Chít", "gender": "female", "isAlive": false, "notes": "Vợ hai", "orderIndex": 2 }
+                        ],
+                        "children": [
+                          {
+                            "fullName": "Nguyễn Văn Hạo",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 1,
+                            "notes": "Con vợ cả",
+                            "spouses": [{ "fullName": "Nguyễn Thị Lan", "gender": "female", "orderIndex": 1 }],
+                            "children": [
+                              {
+                                "fullName": "Nguyễn Văn Hải",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 1,
+                                "spouses": [{ "fullName": "Nguyễn Thị Tuyết", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Hùng", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Thị Yến", "gender": "female", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Dương",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 2,
+                                "spouses": [{ "fullName": "Nguyễn Thị Hương", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thái Dũng", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Thái Sơn", "gender": "male", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Thái",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 3,
+                                "spouses": [{ "fullName": "Nguyễn Thị An", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thái Anh", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Thái Nam", "gender": "male", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Nưa",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 4,
+                                "spouses": [{ "fullName": "Phạm Thị Cẩm Bình", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Giang", "gender": "female", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Thái Nam Anh", "gender": "male", "generation": 9, "birthOrder": 2 },
+                                  { "fullName": "Nguyễn Minh Tuấn", "gender": "male", "generation": 9, "birthOrder": 3 }
+                                ]
+                              },
+                              { "fullName": "Nguyễn Thị Nắng", "gender": "female", "generation": 8, "birthOrder": 5, "notes": "Lấy chồng Nam Định" }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Thị Hộ",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 2,
+                            "notes": "Con vợ cả",
+                            "spouses": [{ "fullName": "Nguyễn Văn Giữa", "gender": "male", "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Nguyễn Thị Hằng", "gender": "female", "generation": 8, "birthOrder": 1, "notes": "Lấy chồng Hà Nội" }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Thị Hà",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 3,
+                            "notes": "Con vợ cả",
+                            "spouses": [{ "fullName": "Nguyễn Văn Tích", "gender": "male", "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Thái Ngọc Luỹ", "gender": "male", "generation": 8, "birthOrder": 1 },
+                              { "fullName": "Thái Ngọc Sơn", "gender": "male", "generation": 8, "birthOrder": 2 },
+                              { "fullName": "Thái Ngọc Lâm", "gender": "male", "generation": 8, "birthOrder": 3 },
+                              { "fullName": "Thái Thị Bé", "gender": "female", "generation": 8, "birthOrder": 4, "notes": "Lấy chồng Xuân Phú" }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Thị Hương",
+                            "gender": "female",
+                            "generation": 7,
+                            "birthOrder": 4,
+                            "notes": "Con vợ cả, lấy chồng Xuân Phú",
+                            "spouses": [{ "fullName": "Bùi Thế Oanh", "gender": "male", "orderIndex": 1 }]
+                          },
+                          {
+                            "fullName": "Nguyễn Thái Học",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 5,
+                            "notes": "Con vợ cả",
+                            "spouses": [{ "fullName": "Nguyễn Thị Đa", "gender": "female", "orderIndex": 1 }],
+                            "children": [
+                              { "fullName": "Nguyễn Thị Tập", "gender": "female", "generation": 8, "birthOrder": 1, "notes": "Công tác tại Liên Xô, vô sinh" },
+                              { "fullName": "Nguyễn Thái Hạnh", "gender": "male", "generation": 8, "birthOrder": 2 }
+                            ]
+                          },
+                          { "fullName": "Nguyễn Thị Tập", "gender": "female", "generation": 7, "birthOrder": 6, "notes": "Con vợ cả, chồng Nguyễn Văn Hiến" },
+                          {
+                            "fullName": "Nguyễn Văn Hành",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 7,
+                            "notes": "Con vợ hai",
+                            "spouses": [{ "fullName": "Nguyễn Thị Tiến", "gender": "female", "orderIndex": 1 }],
+                            "children": [
+                              {
+                                "fullName": "Nguyễn Thị Việt",
+                                "gender": "female",
+                                "generation": 8,
+                                "birthOrder": 1,
+                                "spouses": [{ "fullName": "Nguyễn Văn Hội", "gender": "male", "orderIndex": 1 }]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Trung",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 2,
+                                "spouses": [{ "fullName": "Nguyễn Thị Dương", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Khánh", "gender": "male", "generation": 9, "birthOrder": 1 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Thành",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 3,
+                                "spouses": [{ "fullName": "Nguyễn Thị Hiền", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Phương Anh", "gender": "female", "generation": 9, "birthOrder": 1, "birthDate": "2010" }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Công",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 4,
+                                "spouses": [{ "fullName": "Trịnh Thị Lê", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Gia Huy", "gender": "male", "generation": 9, "birthOrder": 1, "birthDate": "2011" }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "fullName": "Nguyễn Văn Quân",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 8,
+                            "notes": "Con vợ hai",
+                            "spouses": [{ "fullName": "Nguyễn Thị Lượng", "gender": "female", "orderIndex": 1 }],
+                            "children": [
+                              {
+                                "fullName": "Nguyễn Văn Trang",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 1,
+                                "isAlive": false,
+                                "deathDate": "2011",
+                                "spouses": [{ "fullName": "Nguyễn Thị Nguyệt", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Thị Hương Giang", "gender": "female", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Văn Sơn", "gender": "male", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Nghiêm",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 2,
+                                "spouses": [{ "fullName": "Nguyễn Thị Thuý", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Quang", "gender": "male", "generation": 9, "birthOrder": 1 }
+                                ]
+                              },
+                              { "fullName": "Nguyễn Văn Hùng", "gender": "male", "generation": 8, "birthOrder": 3, "isAlive": false, "deathDate": "2012" }
+                            ]
+                          },
+                          { "fullName": "Nguyễn Thị Khuyến", "gender": "female", "generation": 7, "birthOrder": 9, "notes": "Con vợ hai, lấy chồng Tân An" },
+                          { "fullName": "Nguyễn Thị Khích", "gender": "female", "generation": 7, "birthOrder": 10, "notes": "Con vợ hai, lấy chồng Cẩm Nang, Lục Nam" },
+                          { "fullName": "Nguyễn Thị Thêm", "gender": "female", "generation": 7, "birthOrder": 11, "notes": "Con vợ hai, lấy chồng xã Tân An" },
+                          { "fullName": "Nguyễn Thị Vui", "gender": "female", "generation": 7, "birthOrder": 12, "notes": "Con vợ hai, lấy chồng xã Tân An" }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "fullName": "Nguyễn Văn Hấn",
+                    "gender": "male",
+                    "generation": 5,
+                    "birthOrder": 2,
+                    "isAlive": false,
+                    "notes": "Con cháu dân làng thường gọi là Cụ Nên",
+                    "spouses": [
+                      { "fullName": "Chu Thị Tịnh", "gender": "female", "isAlive": false, "notes": "Vợ cả", "orderIndex": 1 },
+                      { "fullName": "Bùi Thị Sê", "gender": "female", "isAlive": false, "notes": "Vợ hai", "orderIndex": 2 }
+                    ],
+                    "children": [
+                      {
+                        "fullName": "Nguyễn Thị Tịu",
+                        "gender": "female",
+                        "generation": 6,
+                        "birthOrder": 1,
+                        "isAlive": false,
+                        "notes": "Con vợ cả",
+                        "spouses": [{ "fullName": "Lê Văn Lãng", "gender": "male", "isAlive": false, "orderIndex": 1 }],
+                        "children": [
+                          { "fullName": "Lê Văn Le", "gender": "male", "generation": 7, "birthOrder": 1, "birthDate": "1940", "isAlive": false }
+                        ]
+                      },
+                      {
+                        "fullName": "Nguyễn Thị Vỵ",
+                        "gender": "female",
+                        "generation": 6,
+                        "birthOrder": 2,
+                        "isAlive": false,
+                        "notes": "Con vợ cả",
+                        "spouses": [{ "fullName": "Nguyễn Văn Sồi", "gender": "male", "isAlive": false, "notes": "Quê Thái Bình", "orderIndex": 1 }],
+                        "children": [
+                          { "fullName": "Nguyễn Văn Lụa", "gender": "male", "generation": 7, "birthOrder": 1, "isAlive": false, "notes": "Liệt sĩ chống Mỹ" },
+                          {
+                            "fullName": "Nguyễn Văn Lĩnh",
+                            "gender": "male",
+                            "generation": 7,
+                            "birthOrder": 2,
+                            "isAlive": false,
+                            "children": [
+                              {
+                                "fullName": "Nguyễn Văn Lượng",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 1,
+                                "spouses": [{ "fullName": "Lê Thị Loan", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Tuấn", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Văn Thành", "gender": "male", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              {
+                                "fullName": "Nguyễn Văn Huệ",
+                                "gender": "male",
+                                "generation": 8,
+                                "birthOrder": 2,
+                                "spouses": [{ "fullName": "Bùi Thị Hưng", "gender": "female", "orderIndex": 1 }],
+                                "children": [
+                                  { "fullName": "Nguyễn Văn Hùng", "gender": "male", "generation": 9, "birthOrder": 1 },
+                                  { "fullName": "Nguyễn Thị Huyền", "gender": "female", "generation": 9, "birthOrder": 2 }
+                                ]
+                              },
+                              { "fullName": "Nguyễn Thị Cúc", "gender": "female", "generation": 8, "birthOrder": 3, "notes": "Lấy chồng xóm Tân Mỹ" },
+                              { "fullName": "Nguyễn Thị Mai", "gender": "female", "generation": 8, "birthOrder": 4, "notes": "Lấy chồng xã Tân Tiến, Yên Dũng" }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "fullName": "Nguyễn Thị Nên",
+                        "gender": "female",
+                        "generation": 6,
+                        "birthOrder": 3,
+                        "isAlive": false,
+                        "notes": "Con vợ hai (Bùi Thị Sê)",
+                        "spouses": [{ "fullName": "Nguyễn Văn Lân", "gender": "male", "isAlive": false, "notes": "Người cùng làng", "orderIndex": 1 }],
+                        "children": [
+                          { "fullName": "Nguyễn Thị Mến", "gender": "female", "generation": 7, "birthOrder": 1 },
+                          { "fullName": "Nguyễn Thị Yên", "gender": "female", "generation": 7, "birthOrder": 2 },
+                          { "fullName": "Nguyễn Văn Vui", "gender": "male", "generation": 7, "birthOrder": 3 },
+                          { "fullName": "Nguyễn Thị Tươi", "gender": "female", "generation": 7, "birthOrder": 4 },
+                          { "fullName": "Nguyễn Văn Thắm", "gender": "male", "generation": 7, "birthOrder": 5 }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
