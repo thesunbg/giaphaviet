@@ -39,7 +39,7 @@ export function MindmapNode({
   return (
     <div
       className={cn(
-        "flex items-center gap-2.5 rounded-lg px-2 py-2 transition-all cursor-pointer hover:bg-white/80",
+        "flex items-center gap-1.5 sm:gap-2.5 rounded-lg px-1 sm:px-2 py-1.5 sm:py-2 transition-all cursor-pointer hover:bg-white/80",
         !member.isAlive && "opacity-70",
         isHighlighted && "ring-2 ring-yellow-400 ring-offset-1 bg-yellow-50 shadow-sm"
       )}
@@ -47,7 +47,7 @@ export function MindmapNode({
       onClick={() => onClick?.(member)}
     >
       {/* Expand/collapse toggle or level-limit badge */}
-      <div className="flex h-6 w-6 shrink-0 items-center justify-center">
+      <div className="flex h-5 w-5 sm:h-6 sm:w-6 shrink-0 items-center justify-center">
         {hasChildren && !levelLimited && (
           <button
             onClick={(e) => {
@@ -120,8 +120,8 @@ export function MindmapNode({
         )}
       </div>
 
-      {/* Generation badge */}
-      <Badge className={cn("text-[10px] shrink-0 whitespace-nowrap", genColor)}>
+      {/* Generation badge — hidden on mobile for space */}
+      <Badge className={cn("hidden sm:inline-flex text-[10px] shrink-0 whitespace-nowrap", genColor)}>
         {"Đời"} {member.generation}
       </Badge>
     </div>

@@ -70,8 +70,8 @@ body {
 /* Mindmap connector lines */
 .mindmap-branch {
   position: relative;
-  padding-left: 24px;
-  margin-left: 12px;
+  padding-left: 16px;
+  margin-left: 8px;
 }
 
 .mindmap-branch::before {
@@ -91,9 +91,9 @@ body {
 .mindmap-branch-item::before {
   content: "";
   position: absolute;
-  left: -24px;
+  left: -16px;
   top: 22px;
-  width: 24px;
+  width: 16px;
   height: 2px;
   background-color: #d2a679;
 }
@@ -106,7 +106,7 @@ body {
 .mindmap-branch > .mindmap-branch-item:last-child::after {
   content: "";
   position: absolute;
-  left: -24px;
+  left: -16px;
   top: 22px;
   bottom: 0;
   width: 2px;

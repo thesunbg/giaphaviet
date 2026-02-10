@@ -258,11 +258,81 @@ export function FamilyTree({ tree }: FamilyTreeProps) {
       {/* ===== MINDMAP MODE ===== */}
       {viewMode === "mindmap" && (
         <>
-          <div className="absolute left-0 right-0 top-0 z-20 flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur-sm border-b border-gray-200 px-3 sm:px-4 py-2.5">
-            {toolbarContent}
+          <div className="absolute left-0 right-0 top-0 z-20 bg-white/90 backdrop-blur-sm border-b border-gray-200 px-3 sm:px-4 py-2">
+            {/* Row 1: View toggle + Level selector + Search counter */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              {/* View mode toggle */}
+              <div className="flex items-center overflow-hidden rounded-lg border border-gray-300">
+                <button
+                  onClick={() => setViewMode("diagram")}
+                  className="flex items-center gap-1 px-2 sm:px-3 py-1.5 text-sm transition-colors cursor-pointer bg-white text-gray-600 hover:bg-gray-50"
+                  title="Sơ đồ"
+                >
+                  <GitBranch className="h-3.5 w-3.5" />
+                  <span className="hidden sm:inline">{"Sơ đồ"}</span>
+                </button>
+                <button
+                  onClick={() => setViewMode("mindmap")}
+                  className="flex items-center gap-1 px-2 sm:px-3 py-1.5 text-sm transition-colors cursor-pointer bg-[#8b4513] text-white"
+                  title="Danh sách"
+                >
+                  <List className="h-3.5 w-3.5" />
+                  <span className="hidden sm:inline">{"Danh sách"}</span>
+                </button>
+              </div>
+
+              {/* Level selector */}
+              <div className="relative">
+                <select
+                  value={maxLevel}
+                  onChange={(e) => setMaxLevel(Number(e.target.value))}
+                  className="appearance-none rounded-lg border border-gray-300 bg-white px-2 sm:px-3 py-1.5 pr-7 sm:pr-8 text-sm text-gray-700 focus:border-[#8b4513] focus:outline-none focus:ring-1 focus:ring-[#8b4513] cursor-pointer"
+                >
+                  {levelOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-1.5 sm:right-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              </div>
+
+              {/* Spacer */}
+              <div className="flex-1" />
+
+              {/* Search result count */}
+              {searchActive && (
+                <span className="text-xs text-gray-500 whitespace-nowrap">
+                  {matchedIds.size > 0
+                    ? `${searchIndex + 1}/${matchedIds.size}`
+                    : "0 kết quả"}
+                </span>
+              )}
+            </div>
+
+            {/* Row 2: Search input full-width */}
+            <div className="relative mt-2">
+              <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleSearchKeyDown}
+                placeholder="Tìm kiếm theo tên..."
+                className="w-full rounded-lg border border-gray-300 bg-white py-1.5 pl-9 pr-8 text-sm text-gray-700 placeholder:text-gray-400 focus:border-[#8b4513] focus:outline-none focus:ring-1 focus:ring-[#8b4513]"
+              />
+              {searchQuery && (
+                <button
+                  onClick={handleClearSearch}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-0.5 hover:bg-gray-100 cursor-pointer"
+                >
+                  <X className="h-3.5 w-3.5 text-gray-400" />
+                </button>
+              )}
+            </div>
           </div>
 
-          <div ref={mindmapScrollRef} className="h-full overflow-y-auto pt-14 px-3 pb-6">
+          <div ref={mindmapScrollRef} className="h-full overflow-y-auto pt-[88px] px-2 sm:px-3 pb-6">
             <MindmapBranch
               node={tree}
               onMemberClick={(member) => setSelectedMember(member)}
