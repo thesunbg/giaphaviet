@@ -67,6 +67,52 @@ body {
   opacity: 0.7;
 }
 
+/* Mindmap connector lines */
+.mindmap-branch {
+  position: relative;
+  padding-left: 24px;
+  margin-left: 12px;
+}
+
+.mindmap-branch::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #d2a679;
+}
+
+.mindmap-branch-item {
+  position: relative;
+}
+
+.mindmap-branch-item::before {
+  content: "";
+  position: absolute;
+  left: -24px;
+  top: 22px;
+  width: 24px;
+  height: 2px;
+  background-color: #d2a679;
+}
+
+/* Shorten vertical line at last child */
+.mindmap-branch-item:last-child > .mindmap-branch::before {
+  /* Normal behavior, no special override needed */
+}
+
+.mindmap-branch > .mindmap-branch-item:last-child::after {
+  content: "";
+  position: absolute;
+  left: -24px;
+  top: 22px;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--background);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

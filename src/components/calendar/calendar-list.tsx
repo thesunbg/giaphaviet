@@ -27,6 +27,34 @@ interface CalendarListProps {
 type FilterType = "all" | "anniversary" | "birthday" | "event";
 type CalendarFilter = "all" | "lunar" | "solar";
 
+const MONTH_NAMES = [
+  "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4",
+  "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8",
+  "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12",
+];
+
+function parseDate(dateStr: string | null): { day?: number; month?: number; year?: number } | null {
+  if (!dateStr) return null;
+  const trimmed = dateStr.trim();
+
+  const fullMatch = trimmed.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (fullMatch) {
+    return { day: parseInt(fullMatch[1]), month: parseInt(fullMatch[2]), year: parseInt(fullMatch[3]) };
+  }
+
+  const monthMatch = trimmed.match(/^(\d{1,2})\/(\d{4})$/);
+  if (monthMatch) {
+    return { month: parseInt(monthMatch[1]), year: parseInt(monthMatch[2]) };
+  }
+
+  const yearMatch = trimmed.match(/^(\d{4})$/);
+  if (yearMatch) {
+    return { year: parseInt(yearMatch[1]) };
+  }
+
+  return null;
+}
+
 function getTypeIcon(type: string) {
   switch (type) {
     case "anniversary":
@@ -58,7 +86,6 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
   const [calendarFilter, setCalendarFilter] = useState<CalendarFilter>("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Combine and filter items
   const filteredItems = useMemo(() => {
     let items: CalendarItem[] = [];
 
@@ -72,12 +99,10 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
       items = [...items, ...events];
     }
 
-    // Filter by calendar type
     if (calendarFilter !== "all") {
       items = items.filter((item) => item.calendarType === calendarFilter);
     }
 
-    // Filter by search query
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase().trim();
       items = items.filter(
@@ -91,6 +116,38 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
     return items;
   }, [anniversaries, birthdays, events, filterType, calendarFilter, searchQuery]);
 
+  const groupedByMonth = useMemo(() => {
+    const groups: Map<number, CalendarItem[]> = new Map();
+
+    for (const item of filteredItems) {
+      const parsed = parseDate(item.date);
+      const monthKey = parsed?.month ?? 0;
+
+      if (!groups.has(monthKey)) {
+        groups.set(monthKey, []);
+      }
+      groups.get(monthKey)!.push(item);
+    }
+
+    const sorted = Array.from(groups.entries()).sort((a, b) => {
+      if (a[0] === 0) return 1;
+      if (b[0] === 0) return -1;
+      return a[0] - b[0];
+    });
+
+    for (const [, items] of sorted) {
+      items.sort((a, b) => {
+        const pa = parseDate(a.date);
+        const pb = parseDate(b.date);
+        const dayA = pa?.day ?? 99;
+        const dayB = pb?.day ?? 99;
+        return dayA - dayB;
+      });
+    }
+
+    return sorted;
+  }, [filteredItems]);
+
   const filterButtons: { value: FilterType; label: string; icon: React.ReactNode; count: number }[] = [
     { value: "all", label: "Tất cả", icon: <Calendar className="h-4 w-4" />, count: anniversaries.length + birthdays.length + events.length },
     { value: "anniversary", label: "Ngày giỗ", icon: <BookOpen className="h-4 w-4" />, count: anniversaries.length },
@@ -102,7 +159,6 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
     <div>
       {/* Filter Controls */}
       <div className="mb-6 space-y-4">
-        {/* Type filter tabs */}
         <div className="flex flex-wrap gap-2">
           {filterButtons.map((btn) => (
             <button
@@ -125,9 +181,7 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
           ))}
         </div>
 
-        {/* Search + Calendar type filter */}
         <div className="flex flex-col gap-3 sm:flex-row">
-          {/* Search */}
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
             <input
@@ -147,26 +201,23 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
             )}
           </div>
 
-          {/* Calendar type filter */}
           <select
             value={calendarFilter}
             onChange={(e) => setCalendarFilter(e.target.value as CalendarFilter)}
             className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#8b4513] focus:outline-none focus:ring-1 focus:ring-[#8b4513]"
           >
-            <option value="all">📅 Tất cả lịch</option>
-            <option value="lunar">🌙 Âm lịch</option>
-            <option value="solar">☀️ Dương lịch</option>
+            <option value="all">Tất cả lịch</option>
+            <option value="lunar">Âm lịch</option>
+            <option value="solar">Dương lịch</option>
           </select>
         </div>
       </div>
 
-      {/* Results count */}
       <p className="mb-4 text-sm text-gray-500">
-        Hiển thị {filteredItems.length} mục
+        {`Hiển thị ${filteredItems.length} mục`}
         {searchQuery && ` cho "${searchQuery}"`}
       </p>
 
-      {/* Items list */}
       {filteredItems.length === 0 ? (
         <div className="rounded-xl border border-gray-200 bg-white py-12 text-center">
           <Calendar className="mx-auto h-12 w-12 text-gray-300" />
@@ -181,47 +232,73 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
           )}
         </div>
       ) : (
-        <div className="space-y-2">
-          {filteredItems.map((item, i) => {
-            const genColor = GENERATION_COLORS[(item.generation - 1) % GENERATION_COLORS.length];
-            return (
-              <Link
-                key={`${item.type}-${item.memberId}-${i}`}
-                href={`/thanh-vien/${item.memberId}`}
-                className="flex items-center justify-between rounded-lg border border-gray-100 bg-white p-4 hover:bg-gray-50 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`flex h-10 w-10 items-center justify-center rounded-full ${getTypeIconBg(item.type)}`}>
-                    {getTypeIcon(item.type)}
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">{item.label}</p>
-                    <div className="flex flex-wrap items-center gap-2 mt-0.5">
-                      {item.type === "event" && (
-                        <span className="text-xs text-gray-400">{item.memberName}</span>
-                      )}
-                      {item.date && (
-                        <span className="text-sm text-gray-500">{item.date}</span>
-                      )}
-                      <span
-                        className="inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-medium"
-                        style={{
-                          backgroundColor: item.calendarType === "lunar" ? "#fef3c7" : "#dbeafe",
-                          color: item.calendarType === "lunar" ? "#92400e" : "#1e40af",
-                        }}
-                      >
-                        {getCalendarEmoji(item.calendarType)} {getCalendarLabel(item.calendarType)}
-                      </span>
-                    </div>
-                    {item.description && (
-                      <p className="mt-0.5 text-xs text-gray-400">{item.description}</p>
-                    )}
-                  </div>
+        <div className="space-y-6">
+          {groupedByMonth.map(([monthKey, items]) => (
+            <div key={monthKey}>
+              <div className="sticky top-0 z-10 mb-2 flex items-center gap-2 bg-[#faf9f6] py-2">
+                <div className={`flex h-8 items-center rounded-full px-4 text-sm font-semibold ${
+                  monthKey === 0
+                    ? "bg-gray-200 text-gray-600"
+                    : "bg-[#8b4513] text-white"
+                }`}>
+                  <Calendar className="mr-1.5 h-3.5 w-3.5" />
+                  {monthKey === 0 ? "Chưa rõ tháng" : MONTH_NAMES[monthKey - 1]}
                 </div>
-                <Badge className={genColor + " text-xs shrink-0 ml-2"}>Đời {item.generation}</Badge>
-              </Link>
-            );
-          })}
+                <span className="text-xs text-gray-400">
+                  {`${items.length} mục`}
+                </span>
+              </div>
+
+              <div className="space-y-2">
+                {items.map((item, i) => {
+                  const genColor = GENERATION_COLORS[(item.generation - 1) % GENERATION_COLORS.length];
+                  const parsed = parseDate(item.date);
+                  const dayDisplay = parsed?.day ? `Ngày ${parsed.day}` : null;
+
+                  return (
+                    <Link
+                      key={`${item.type}-${item.memberId}-${i}`}
+                      href={`/thanh-vien/${item.memberId}`}
+                      className="flex items-center justify-between rounded-lg border border-gray-100 bg-white p-4 hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`flex h-10 w-10 items-center justify-center rounded-full ${getTypeIconBg(item.type)}`}>
+                          {getTypeIcon(item.type)}
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-900">{item.label}</p>
+                          <div className="flex flex-wrap items-center gap-2 mt-0.5">
+                            {item.type === "event" && (
+                              <span className="text-xs text-gray-400">{item.memberName}</span>
+                            )}
+                            {dayDisplay && (
+                              <span className="text-sm font-medium text-[#8b4513]">{dayDisplay}</span>
+                            )}
+                            {item.date && (
+                              <span className="text-xs text-gray-400">{item.date}</span>
+                            )}
+                            <span
+                              className="inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-medium"
+                              style={{
+                                backgroundColor: item.calendarType === "lunar" ? "#fef3c7" : "#dbeafe",
+                                color: item.calendarType === "lunar" ? "#92400e" : "#1e40af",
+                              }}
+                            >
+                              {getCalendarEmoji(item.calendarType)} {getCalendarLabel(item.calendarType)}
+                            </span>
+                          </div>
+                          {item.description && (
+                            <p className="mt-0.5 text-xs text-gray-400">{item.description}</p>
+                          )}
+                        </div>
+                      </div>
+                      <Badge className={genColor + " text-xs shrink-0 ml-2"}>{`Đời ${item.generation}`}</Badge>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
