@@ -64,9 +64,9 @@ function ZoomControls() {
 
 export function FamilyTree({ tree }: FamilyTreeProps) {
   const [selectedMember, setSelectedMember] = useState<MemberData | null>(null);
-  const [maxLevel, setMaxLevel] = useState<number>(0);
+  const [maxLevel, setMaxLevel] = useState<number>(4);
   const [searchQuery, setSearchQuery] = useState("");
-  const [viewMode, setViewMode] = useState<ViewMode>("mindmap");
+  const [viewMode, setViewMode] = useState<ViewMode>("diagram");
   const [searchIndex, setSearchIndex] = useState(0);
   const mindmapScrollRef = useRef<HTMLDivElement>(null);
 
