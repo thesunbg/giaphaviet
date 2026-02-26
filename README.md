@@ -2,6 +2,10 @@
 
 Ứng dụng web quản lý gia phả dòng họ, hỗ trợ hiển thị cây gia phả trực quan, quản lý thông tin thành viên, lịch gia đình với âm lịch/dương lịch, và trang quản trị bảo mật bằng mật khẩu.
 
+## Demo
+
+https://giaphahonguyen.app.nguyenvando.com/gia-pha
+
 ## Tech Stack
 
 | Công nghệ | Phiên bản | Mô tả |
