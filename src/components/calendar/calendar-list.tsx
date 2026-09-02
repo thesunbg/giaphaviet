@@ -158,13 +158,13 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
   return (
     <div>
       {/* Filter Controls */}
-      <div className="mb-6 space-y-4">
-        <div className="flex flex-wrap gap-2">
+      <div className="mb-4 space-y-3 sm:mb-6 sm:space-y-4">
+        <div className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
           {filterButtons.map((btn) => (
             <button
               key={btn.value}
               onClick={() => setFilterType(btn.value)}
-              className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${
+              className={`flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-medium transition-colors cursor-pointer sm:px-4 ${
                 filterType === btn.value
                   ? "bg-[#8b4513] text-white"
                   : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
@@ -181,15 +181,15 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
           ))}
         </div>
 
-        <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="flex gap-2 sm:gap-3">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Tìm theo tên thành viên..."
-              className="w-full rounded-lg border border-gray-300 py-2 pl-10 pr-10 text-sm focus:border-[#8b4513] focus:outline-none focus:ring-1 focus:ring-[#8b4513]"
+              placeholder="Tìm theo tên..."
+              className="w-full rounded-lg border border-gray-300 bg-white py-2 pl-10 pr-10 text-sm focus:border-[#8b4513] focus:outline-none focus:ring-1 focus:ring-[#8b4513]"
             />
             {searchQuery && (
               <button
@@ -204,7 +204,7 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
           <select
             value={calendarFilter}
             onChange={(e) => setCalendarFilter(e.target.value as CalendarFilter)}
-            className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-[#8b4513] focus:outline-none focus:ring-1 focus:ring-[#8b4513]"
+            className="shrink-0 rounded-lg border border-gray-300 bg-white px-2 py-2 text-sm focus:border-[#8b4513] sm:px-3 focus:outline-none focus:ring-1 focus:ring-[#8b4513]"
           >
             <option value="all">Tất cả lịch</option>
             <option value="lunar">Âm lịch</option>
@@ -235,7 +235,7 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
         <div className="space-y-6">
           {groupedByMonth.map(([monthKey, items]) => (
             <div key={monthKey}>
-              <div className="sticky top-0 z-10 mb-2 flex items-center gap-2 bg-[#faf9f6] py-2">
+              <div className="sticky top-14 z-10 mb-2 flex items-center gap-2 bg-[#faf9f6] py-2 md:top-16">
                 <div className={`flex h-8 items-center rounded-full px-4 text-sm font-semibold ${
                   monthKey === 0
                     ? "bg-gray-200 text-gray-600"
@@ -259,14 +259,14 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
                     <Link
                       key={`${item.type}-${item.memberId}-${i}`}
                       href={`/thanh-vien/${item.memberId}`}
-                      className="flex items-center justify-between rounded-lg border border-gray-100 bg-white p-4 hover:bg-gray-50 transition-colors"
+                      className="flex items-center justify-between gap-2 rounded-lg border border-gray-100 bg-white p-3 hover:bg-gray-50 active:bg-gray-50 transition-colors sm:p-4"
                     >
-                      <div className="flex items-center gap-3">
-                        <div className={`flex h-10 w-10 items-center justify-center rounded-full ${getTypeIconBg(item.type)}`}>
+                      <div className="flex min-w-0 items-center gap-3">
+                        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${getTypeIconBg(item.type)}`}>
                           {getTypeIcon(item.type)}
                         </div>
-                        <div>
-                          <p className="font-medium text-gray-900">{item.label}</p>
+                        <div className="min-w-0">
+                          <p className="font-medium text-gray-900 text-sm sm:text-base">{item.label}</p>
                           <div className="flex flex-wrap items-center gap-2 mt-0.5">
                             {item.type === "event" && (
                               <span className="text-xs text-gray-400">{item.memberName}</span>

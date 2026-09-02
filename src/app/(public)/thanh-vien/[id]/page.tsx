@@ -55,17 +55,17 @@ export default async function PublicMemberPage({
   const lifeSpan = getLifeSpan(member.birthDate, member.deathDate, member.isAlive);
 
   return (
-    <div className="mx-auto max-w-4xl p-6">
+    <div className="mx-auto max-w-4xl p-4 sm:p-6">
       <Link
         href="/gia-pha"
-        className="mb-6 inline-flex items-center gap-1 text-sm text-gray-500 hover:text-[#8b4513] transition-colors"
+        className="mb-4 inline-flex items-center gap-1 py-1 text-sm sm:mb-6 text-gray-500 hover:text-[#8b4513] transition-colors"
       >
         <ChevronLeft className="h-4 w-4" />
         Quay lại Cây Gia Phả
       </Link>
 
       {/* Profile Header */}
-      <Card className="mb-6">
+      <Card className="mb-4 sm:mb-6">
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
           <Avatar
             src={member.photoUrl}
@@ -73,7 +73,7 @@ export default async function PublicMemberPage({
             size="lg"
           />
           <div className="flex-1 text-center sm:text-left">
-            <h1 className="text-2xl font-bold text-gray-900">{member.fullName}</h1>
+            <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">{member.fullName}</h1>
             {lifeSpan && <p className="text-gray-500">{lifeSpan}</p>}
             <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
               <Badge className={genColor}>Đời {member.generation}</Badge>
@@ -117,7 +117,7 @@ export default async function PublicMemberPage({
         </div>
       </Card>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
         {/* Biography */}
         {member.biography && (
           <Card className="lg:col-span-2">
@@ -145,7 +145,7 @@ export default async function PublicMemberPage({
                   <Link
                     key={p.member.id}
                     href={`/thanh-vien/${p.member.id}`}
-                    className="mb-1 flex items-center gap-2 rounded-lg p-2 hover:bg-gray-50"
+                    className="mb-1 flex items-center gap-2 rounded-lg p-2 hover:bg-gray-50 active:bg-gray-50"
                   >
                     <Avatar
                       src={p.member.photoUrl}
@@ -164,7 +164,7 @@ export default async function PublicMemberPage({
                   <Link
                     key={s.id}
                     href={`/thanh-vien/${s.id}`}
-                    className="mb-1 flex items-center gap-2 rounded-lg p-2 hover:bg-gray-50"
+                    className="mb-1 flex items-center gap-2 rounded-lg p-2 hover:bg-gray-50 active:bg-gray-50"
                   >
                     <Avatar
                       src={s.photoUrl}
@@ -183,7 +183,7 @@ export default async function PublicMemberPage({
                   <Link
                     key={c.member.id}
                     href={`/thanh-vien/${c.member.id}`}
-                    className="mb-1 flex items-center gap-2 rounded-lg p-2 hover:bg-gray-50"
+                    className="mb-1 flex items-center gap-2 rounded-lg p-2 hover:bg-gray-50 active:bg-gray-50"
                   >
                     <Avatar
                       src={c.member.photoUrl}

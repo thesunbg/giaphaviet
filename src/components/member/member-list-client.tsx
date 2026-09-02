@@ -38,13 +38,13 @@ export function MemberListClient({ members }: MemberListClientProps) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center gap-4">
-        <h1 className="text-2xl font-bold text-gray-900 whitespace-nowrap">
+      <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 whitespace-nowrap">
           Thành Viên
         </h1>
 
         {/* Search */}
-        <div className="relative flex-1 max-w-sm">
+        <div className="relative order-last basis-full sm:order-none sm:basis-auto sm:flex-1 sm:max-w-sm">
           <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
@@ -73,10 +73,10 @@ export function MemberListClient({ members }: MemberListClientProps) {
         )}
 
         {/* Spacer */}
-        <div className="flex-1" />
+        <div className="hidden flex-1 sm:block" />
 
         {/* Add button */}
-        <Link href="/admin/thanh-vien/them-moi">
+        <Link href="/admin/thanh-vien/them-moi" className="ml-auto sm:ml-0">
           <Button>
             <Plus className="mr-2 h-4 w-4" />
             Thêm mới
@@ -99,26 +99,26 @@ export function MemberListClient({ members }: MemberListClientProps) {
           </p>
         </div>
       ) : (
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+        <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white">
           <table className="w-full">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50">
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-gray-500">
+                <th className="px-3 py-3 text-left text-xs font-medium uppercase text-gray-500 sm:px-6">
                   Thành viên
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-gray-500">
+                <th className="px-3 py-3 text-left text-xs font-medium uppercase text-gray-500 sm:px-6">
                   Đời
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-gray-500">
+                <th className="hidden px-6 py-3 text-left text-xs font-medium uppercase text-gray-500 md:table-cell">
                   Giới tính
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-gray-500">
+                <th className="hidden px-6 py-3 text-left text-xs font-medium uppercase text-gray-500 lg:table-cell">
                   Nghề nghiệp
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-gray-500">
+                <th className="hidden px-6 py-3 text-left text-xs font-medium uppercase text-gray-500 sm:table-cell">
                   Tình trạng
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium uppercase text-gray-500">
+                <th className="px-3 py-3 text-right text-xs font-medium uppercase text-gray-500 sm:px-6">
                   Hành động
                 </th>
               </tr>
@@ -126,7 +126,7 @@ export function MemberListClient({ members }: MemberListClientProps) {
             <tbody className="divide-y divide-gray-100">
               {filteredMembers.map((m) => (
                 <tr key={m.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4">
+                  <td className="px-3 py-3 sm:px-6 sm:py-4">
                     <Link
                       href={`/admin/thanh-vien/${m.id}`}
                       className="flex items-center gap-3"
@@ -146,7 +146,7 @@ export function MemberListClient({ members }: MemberListClientProps) {
                       </div>
                     </Link>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-3 py-3 sm:px-6 sm:py-4">
                     <Badge
                       className={
                         GENERATION_COLORS[(m.generation - 1) % GENERATION_COLORS.length]
@@ -155,13 +155,13 @@ export function MemberListClient({ members }: MemberListClientProps) {
                       Đời {m.generation}
                     </Badge>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">
+                  <td className="hidden px-6 py-4 text-sm text-gray-600 md:table-cell">
                     {m.gender === "male" ? "Nam" : "Nữ"}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">
+                  <td className="hidden px-6 py-4 text-sm text-gray-600 lg:table-cell">
                     {m.occupation || "\u2014"}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="hidden px-6 py-4 sm:table-cell">
                     {m.isAlive ? (
                       <Badge className="bg-green-100 text-green-700 border-green-200">
                         Còn sống
@@ -172,7 +172,7 @@ export function MemberListClient({ members }: MemberListClientProps) {
                       </Badge>
                     )}
                   </td>
-                  <td className="px-6 py-4 text-right">
+                  <td className="px-3 py-3 text-right sm:px-6 sm:py-4">
                     <MemberActions memberId={m.id} />
                   </td>
                 </tr>

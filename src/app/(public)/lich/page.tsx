@@ -80,10 +80,10 @@ export default async function CalendarPage() {
   }));
 
   return (
-    <div className="mx-auto max-w-4xl p-6">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <Calendar className="h-7 w-7 text-[#8b4513]" />
+    <div className="mx-auto max-w-4xl p-4 sm:p-6">
+      <div className="mb-4 sm:mb-6">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
+          <Calendar className="h-6 w-6 sm:h-7 sm:w-7 text-[#8b4513]" />
           Lịch Gia Đình
         </h1>
         <p className="mt-1 text-sm text-gray-500">
@@ -92,25 +92,25 @@ export default async function CalendarPage() {
       </div>
 
       {/* Stats */}
-      <div className="mb-6 grid grid-cols-3 gap-4">
-        <Card className="text-center">
+      <div className="mb-4 grid grid-cols-3 gap-2 sm:mb-6 sm:gap-4">
+        <Card className="text-center !p-3 sm:!p-6">
           <div className="flex flex-col items-center">
             <BookOpen className="h-6 w-6 text-purple-500 mb-1" />
-            <p className="text-2xl font-bold text-gray-900">{anniversaries.length}</p>
+            <p className="text-xl sm:text-2xl font-bold text-gray-900">{anniversaries.length}</p>
             <p className="text-xs text-gray-500">Ngày giỗ</p>
           </div>
         </Card>
-        <Card className="text-center">
+        <Card className="text-center !p-3 sm:!p-6">
           <div className="flex flex-col items-center">
             <Cake className="h-6 w-6 text-green-500 mb-1" />
-            <p className="text-2xl font-bold text-gray-900">{birthdays.length}</p>
+            <p className="text-xl sm:text-2xl font-bold text-gray-900">{birthdays.length}</p>
             <p className="text-xs text-gray-500">Sinh nhật</p>
           </div>
         </Card>
-        <Card className="text-center">
+        <Card className="text-center !p-3 sm:!p-6">
           <div className="flex flex-col items-center">
             <Star className="h-6 w-6 text-blue-500 mb-1" />
-            <p className="text-2xl font-bold text-gray-900">{eventItems.length}</p>
+            <p className="text-xl sm:text-2xl font-bold text-gray-900">{eventItems.length}</p>
             <p className="text-xs text-gray-500">Sự kiện</p>
           </div>
         </Card>

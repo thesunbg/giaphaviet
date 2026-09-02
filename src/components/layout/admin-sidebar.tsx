@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -12,6 +12,8 @@ import {
   FileJson,
   TreePine,
   LogOut,
+  Menu,
+  X,
 } from "lucide-react";
 
 const navItems = [
@@ -26,6 +28,15 @@ export function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  // Lock body scroll while the drawer is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   async function handleLogout() {
     setLoggingOut(true);
@@ -38,12 +49,13 @@ export function AdminSidebar() {
     }
   }
 
-  return (
-    <aside className="flex h-full w-64 flex-col border-r border-gray-200 bg-white">
-      <div className="flex h-16 items-center gap-2 border-b border-gray-200 px-6">
-        <TreePine className="h-6 w-6 text-[#8b4513]" />
-        <span className="text-lg font-bold text-[#8b4513]">Quản Trị</span>
-      </div>
+  const currentLabel =
+    navItems.find((item) =>
+      item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href)
+    )?.label ?? "Quản Trị";
+
+  const navContent = (
+    <>
       <nav className="flex-1 space-y-1 p-4">
         {navItems.map((item) => {
           const isActive =
@@ -54,11 +66,12 @@ export function AdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => setOpen(false)}
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive
                   ? "bg-[#8b4513]/10 text-[#8b4513]"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 active:bg-gray-100"
               )}
             >
               <item.icon className="h-5 w-5" />
@@ -67,9 +80,10 @@ export function AdminSidebar() {
           );
         })}
       </nav>
-      <div className="space-y-2 border-t border-gray-200 p-4">
+      <div className="space-y-3 border-t border-gray-200 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
         <Link
           href="/gia-pha"
+          onClick={() => setOpen(false)}
           className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#8b4513] transition-colors"
         >
           <TreePine className="h-4 w-4" />
@@ -84,6 +98,67 @@ export function AdminSidebar() {
           {loggingOut ? "Đang đăng xuất..." : "Đăng Xuất"}
         </button>
       </div>
-    </aside>
+    </>
+  );
+
+  return (
+    <>
+      {/* ===== Mobile top bar ===== */}
+      <div className="sticky top-0 z-40 flex h-14 shrink-0 items-center gap-2 border-b border-gray-200 bg-white px-3 md:hidden">
+        <button
+          onClick={() => setOpen(true)}
+          className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-600 active:bg-gray-100"
+          aria-label="Mở menu"
+        >
+          <Menu className="h-6 w-6" />
+        </button>
+        <div className="flex min-w-0 flex-1 items-center gap-2">
+          <TreePine className="h-5 w-5 shrink-0 text-[#8b4513]" />
+          <span className="truncate text-base font-bold text-[#8b4513]">{currentLabel}</span>
+        </div>
+        <Link
+          href="/gia-pha"
+          className="rounded-lg px-2 py-1.5 text-xs font-medium text-gray-500 active:bg-gray-100"
+        >
+          Xem Gia Phả
+        </Link>
+      </div>
+
+      {/* ===== Mobile drawer ===== */}
+      {open && (
+        <div className="fixed inset-0 z-50 md:hidden">
+          <div
+            className="absolute inset-0 bg-black/40"
+            onClick={() => setOpen(false)}
+            aria-hidden="true"
+          />
+          <aside className="drawer-enter absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col bg-white shadow-2xl">
+            <div className="flex h-14 items-center justify-between border-b border-gray-200 px-4">
+              <div className="flex items-center gap-2">
+                <TreePine className="h-6 w-6 text-[#8b4513]" />
+                <span className="text-lg font-bold text-[#8b4513]">Quản Trị</span>
+              </div>
+              <button
+                onClick={() => setOpen(false)}
+                className="rounded-full p-1.5 text-gray-500 active:bg-gray-100"
+                aria-label="Đóng menu"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            {navContent}
+          </aside>
+        </div>
+      )}
+
+      {/* ===== Desktop sidebar ===== */}
+      <aside className="hidden h-full w-64 shrink-0 flex-col border-r border-gray-200 bg-white md:flex">
+        <div className="flex h-16 items-center gap-2 border-b border-gray-200 px-6">
+          <TreePine className="h-6 w-6 text-[#8b4513]" />
+          <span className="text-lg font-bold text-[#8b4513]">Quản Trị</span>
+        </div>
+        {navContent}
+      </aside>
+    </>
   );
 }
