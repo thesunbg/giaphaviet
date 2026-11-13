@@ -1,9 +1,11 @@
 -- CreateTable
 CREATE TABLE "Member" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "fullName" TEXT NOT NULL,
     "birthDate" TEXT,
+    "birthDateType" TEXT DEFAULT 'solar',
     "deathDate" TEXT,
+    "deathDateType" TEXT DEFAULT 'solar',
     "isAlive" BOOLEAN NOT NULL DEFAULT true,
     "gender" TEXT NOT NULL,
     "generation" INTEGER NOT NULL DEFAULT 1,
@@ -13,55 +15,61 @@ CREATE TABLE "Member" (
     "biography" TEXT,
     "graveInfo" TEXT,
     "deathAnniversary" TEXT,
+    "deathAnniversaryType" TEXT DEFAULT 'lunar',
     "notes" TEXT,
     "photoUrl" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Member_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "ParentChild" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "parentId" TEXT NOT NULL,
     "childId" TEXT NOT NULL,
     "relationshipType" TEXT NOT NULL DEFAULT 'biological',
-    CONSTRAINT "ParentChild_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "Member" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "ParentChild_childId_fkey" FOREIGN KEY ("childId") REFERENCES "Member" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+
+    CONSTRAINT "ParentChild_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Marriage" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "spouse1Id" TEXT NOT NULL,
     "spouse2Id" TEXT NOT NULL,
     "marriageDate" TEXT,
     "divorceDate" TEXT,
     "isActive" BOOLEAN NOT NULL DEFAULT true,
     "orderIndex" INTEGER NOT NULL DEFAULT 1,
-    CONSTRAINT "Marriage_spouse1Id_fkey" FOREIGN KEY ("spouse1Id") REFERENCES "Member" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "Marriage_spouse2Id_fkey" FOREIGN KEY ("spouse2Id") REFERENCES "Member" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+
+    CONSTRAINT "Marriage_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Event" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "memberId" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "date" TEXT,
+    "calendarType" TEXT DEFAULT 'solar',
     "description" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "Event_memberId_fkey" FOREIGN KEY ("memberId") REFERENCES "Member" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Photo" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "memberId" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     "caption" TEXT,
     "isProfile" BOOLEAN NOT NULL DEFAULT false,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "Photo_memberId_fkey" FOREIGN KEY ("memberId") REFERENCES "Member" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Photo_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -93,3 +101,21 @@ CREATE INDEX "Event_memberId_idx" ON "Event"("memberId");
 
 -- CreateIndex
 CREATE INDEX "Photo_memberId_idx" ON "Photo"("memberId");
+
+-- AddForeignKey
+ALTER TABLE "ParentChild" ADD CONSTRAINT "ParentChild_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "Member"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ParentChild" ADD CONSTRAINT "ParentChild_childId_fkey" FOREIGN KEY ("childId") REFERENCES "Member"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Marriage" ADD CONSTRAINT "Marriage_spouse1Id_fkey" FOREIGN KEY ("spouse1Id") REFERENCES "Member"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Marriage" ADD CONSTRAINT "Marriage_spouse2Id_fkey" FOREIGN KEY ("spouse2Id") REFERENCES "Member"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Event" ADD CONSTRAINT "Event_memberId_fkey" FOREIGN KEY ("memberId") REFERENCES "Member"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Photo" ADD CONSTRAINT "Photo_memberId_fkey" FOREIGN KEY ("memberId") REFERENCES "Member"("id") ON DELETE CASCADE ON UPDATE CASCADE;

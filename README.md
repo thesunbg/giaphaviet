@@ -15,7 +15,7 @@ https://giaphahonguyen.app.nguyenvando.com/gia-pha
 | TypeScript | 5.x | Type safety |
 | Tailwind CSS | 4.x | Styling |
 | Prisma | 5.22 | ORM |
-| SQLite | - | Cơ sở dữ liệu (file-based) |
+| PostgreSQL | 14+ | Cơ sở dữ liệu |
 | Zod | 4.3.6 | Validation |
 | react-zoom-pan-pinch | 3.7.0 | Zoom/pan cho cây gia phả |
 | lucide-react | 0.563.0 | Icons |
@@ -101,8 +101,16 @@ https://giaphahonguyen.app.nguyenvando.com/gia-pha
 - **Cảnh báo**: Import sẽ xóa toàn bộ dữ liệu cũ
 - Hiển thị thống kê sau import
 
+#### Export Gia Phả (`/admin/export`)
+- **Export JSON**: tải toàn bộ gia phả (cây lồng nhau, đầy đủ thành viên, hôn nhân, quan hệ cha-mẹ-con, ngày giỗ, mộ phần, ảnh, sự kiện)
+  - File export **import lại được nguyên trạng** qua trang Import → dùng làm bản sao lưu
+  - Xem trước / copy JSON ngay trên trang
+- **Export CSV**: danh sách thành viên dạng bảng (mở bằng Excel / Google Sheets, UTF-8 có BOM)
+  - Mỗi thành viên một dòng, kèm tên cha, mẹ, vợ/chồng, ngày giỗ, nghề nghiệp, nơi ở
+- Hiển thị thống kê số thành viên / quan hệ / hôn nhân / sự kiện sẽ được export
+
 #### Sidebar
-- Điều hướng: Tổng Quan, Thành Viên, Quan Hệ, Sự Kiện, Import JSON
+- Điều hướng: Tổng Quan, Thành Viên, Quan Hệ, Sự Kiện, Import JSON, Export JSON
 - Link "Xem Gia Phả" (mở trang công khai)
 - Nút **Đăng Xuất**
 
@@ -111,7 +119,8 @@ https://giaphahonguyen.app.nguyenvando.com/gia-pha
 ## Cài Đặt
 
 ### Yêu cầu
-- Node.js >= 18 (khuyến nghị v20+, đã test với v21.6.0)
+- Node.js >= 18 (khuyến nghị v20+; script chuyển dữ liệu từ SQLite cần Node >= 22)
+- PostgreSQL >= 14 (local, Docker, hoặc dịch vụ như Neon / Supabase / RDS)
 - npm
 
 ### Các bước
@@ -124,18 +133,23 @@ cd giaphaviet
 # 2. Cài đặt dependencies
 npm install
 
-# 3. Tạo file .env
+# 3. Tạo database PostgreSQL (ví dụ với psql)
+createdb giaphaviet
+# hoặc: docker run -d --name giaphaviet-db -e POSTGRES_PASSWORD=postgres \
+#         -e POSTGRES_DB=giaphaviet -p 5432:5432 postgres:16
+
+# 4. Tạo file .env và điền DATABASE_URL
 cp .env.example .env
-# Hoặc tạo thủ công (xem phần Cấu hình bên dưới)
 
-# 4. Tạo database và generate Prisma client
+# 5. Tạo bảng và generate Prisma client
 npx prisma generate
-npx prisma db push
+npx prisma migrate deploy      # production
+# npx prisma migrate dev       # development
 
-# 5. (Tùy chọn) Seed dữ liệu mẫu
+# 6. (Tùy chọn) Seed dữ liệu mẫu
 npm run seed
 
-# 6. Chạy development server
+# 7. Chạy development server
 npm run dev
 ```
 
@@ -153,8 +167,9 @@ npm run start
 ## Cấu Hình (.env)
 
 ```env
-# Đường dẫn database SQLite
-DATABASE_URL="file:./dev.db"
+# Chuỗi kết nối PostgreSQL
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/giaphaviet?schema=public"
+# Dịch vụ cloud (Neon, Supabase, RDS...) thường cần thêm: &sslmode=require
 
 # Mật khẩu đăng nhập admin (thay đổi cho production!)
 ADMIN_PASSWORD=giaphaviet2024
@@ -163,7 +178,20 @@ ADMIN_PASSWORD=giaphaviet2024
 AUTH_SECRET=thay-bang-chuoi-ngau-nhien-dai-32-ky-tu
 ```
 
+Xem file mẫu [`.env.example`](.env.example).
+
 > **Lưu ý**: Đổi `ADMIN_PASSWORD` và `AUTH_SECRET` khi deploy production. Thay đổi `AUTH_SECRET` sẽ đăng xuất tất cả session hiện tại.
+
+### Chuyển dữ liệu từ bản SQLite cũ sang PostgreSQL
+
+Bản trước dùng SQLite (`prisma/dev.db`). Để giữ nguyên dữ liệu khi chuyển sang PostgreSQL:
+
+```bash
+node scripts/sqlite-to-json.mjs prisma/dev.db gia-pha-backup.json
+```
+
+Sau đó tạo database PostgreSQL, chạy `npx prisma migrate deploy`, đăng nhập `/admin/import` và import file `gia-pha-backup.json`.
+Script đọc trực tiếp file SQLite (cần Node >= 22) và xuất ra đúng định dạng của trang Import, giữ cả quan hệ với mẹ, con nuôi, ngày giỗ và sự kiện.
 
 ---
 
@@ -187,6 +215,7 @@ AUTH_SECRET=thay-bang-chuoi-ngau-nhien-dai-32-ky-tu
    - **Quan Hệ**: Thiết lập quan hệ cha-con và hôn nhân
    - **Sự Kiện**: Thêm sự kiện quan trọng cho thành viên
    - **Import JSON**: Import dữ liệu hàng loạt từ file JSON
+   - **Export JSON**: Tải bản sao lưu toàn bộ gia phả (JSON) hoặc danh sách thành viên (CSV)
 4. Nhấn **Đăng Xuất** ở cuối sidebar khi hoàn tất
 
 ### Import JSON
@@ -234,8 +263,11 @@ Cấu trúc file JSON hỗ trợ:
 ```
 giaphaviet/
 ├── prisma/
-│   ├── schema.prisma          # Database schema (5 bảng)
-│   └── dev.db                 # SQLite database file
+│   ├── schema.prisma          # Database schema (5 bảng, PostgreSQL)
+│   ├── migrations/            # Prisma migrations
+│   └── seed.ts                # Dữ liệu mẫu
+├── scripts/
+│   └── sqlite-to-json.mjs     # Chuyển dữ liệu SQLite cũ -> JSON để import
 ├── public/
 │   └── uploads/               # Ảnh upload
 ├── src/
@@ -254,7 +286,8 @@ giaphaviet/
 │   │   │   ├── thanh-vien/    # CRUD thành viên
 │   │   │   ├── quan-he/       # Quản lý quan hệ
 │   │   │   ├── su-kien/       # Quản lý sự kiện
-│   │   │   └── import/        # Import JSON
+│   │   │   ├── import/        # Import JSON
+│   │   │   └── export/        # Export JSON / CSV
 │   │   └── api/               # API routes
 │   │       ├── auth/          # Login/Logout
 │   │       ├── members/       # CRUD thành viên
@@ -264,7 +297,8 @@ giaphaviet/
 │   │       ├── calendar/      # Lịch tổng hợp
 │   │       ├── tree/          # Cây gia phả
 │   │       ├── upload/        # Upload ảnh
-│   │       └── import/        # Import dữ liệu
+│   │       ├── import/        # Import dữ liệu
+│   │       └── export/        # Export dữ liệu
 │   ├── components/
 │   │   ├── layout/            # Header, Footer, AdminSidebar
 │   │   ├── tree/              # FamilyTree, TreeBranch, TreeNode
@@ -330,6 +364,8 @@ giaphaviet/
 | GET | `/api/calendar` | Lịch tổng hợp | - |
 | POST | `/api/upload` | Upload ảnh (max 5MB) | Required |
 | POST | `/api/import` | Import JSON (xóa dữ liệu cũ) | Required |
+| GET | `/api/export?format=json` | Export toàn bộ gia phả (JSON, import lại được) | Required |
+| GET | `/api/export?format=csv` | Export danh sách thành viên (CSV cho Excel) | Required |
 
 ---
 
