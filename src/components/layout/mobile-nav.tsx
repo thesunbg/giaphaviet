@@ -2,17 +2,29 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { TreePine, CalendarDays } from "lucide-react";
+import { TreePine, CalendarDays, Newspaper, Images, MessagesSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const items = [
+const baseItems = [
   { href: "/gia-pha", label: "Gia Phả", icon: TreePine },
   { href: "/lich", label: "Lịch", icon: CalendarDays },
 ];
 
+const memberItems = [
+  { href: "/feed", label: "Bảng Tin", icon: Newspaper },
+  { href: "/anh", label: "Ảnh", icon: Images },
+  { href: "/chat", label: "Trò Chuyện", icon: MessagesSquare },
+];
+
+interface MobileNavProps {
+  /** Tài khoản thật mới thấy bảng tin / ảnh / chat (mã xem thì không) */
+  isMember?: boolean;
+}
+
 /** Bottom tab bar, only visible on small screens. */
-export function MobileNav() {
+export function MobileNav({ isMember = false }: MobileNavProps) {
   const pathname = usePathname();
+  const items = isMember ? [...baseItems, ...memberItems] : baseItems;
 
   return (
     <nav

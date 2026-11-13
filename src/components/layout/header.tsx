@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { TreePine } from "lucide-react";
 import { getViewer } from "@/lib/user-auth";
+import { getSiteSettings } from "@/lib/settings";
 import { UserMenu } from "./user-menu";
 
 export async function Header() {
-  const viewer = await getViewer();
+  const [viewer, settings] = await Promise.all([getViewer(), getSiteSettings()]);
 
   const menu =
     viewer?.kind === "user"
@@ -15,12 +16,17 @@ export async function Header() {
           ? { name: null, role: "viewer" as const }
           : null;
 
+  // Mã xem (chỉ xem gia phả) không thấy khu vực tương tác nội bộ
+  const isMember = viewer?.kind === "user" || viewer?.kind === "legacy-admin";
+
   return (
     <header className="sticky top-0 z-40 border-b border-[#d2a679]/30 bg-white/80 backdrop-blur-sm">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:h-16">
         <Link href="/gia-pha" className="flex items-center gap-2">
           <TreePine className="h-6 w-6 text-[#8b4513] md:h-7 md:w-7" />
-          <span className="text-lg font-bold text-[#8b4513] md:text-xl">Gia Phả Việt</span>
+          <span className="max-w-[55vw] truncate text-lg font-bold text-[#8b4513] md:max-w-none md:text-xl">
+            {settings.familyName}
+          </span>
         </Link>
 
         <div className="flex items-center gap-4">
@@ -38,6 +44,28 @@ export async function Header() {
             >
               Lịch Gia Đình
             </Link>
+            {isMember && (
+              <>
+                <Link
+                  href="/feed"
+                  className="text-sm font-medium text-gray-600 hover:text-[#8b4513] transition-colors"
+                >
+                  Bảng Tin
+                </Link>
+                <Link
+                  href="/anh"
+                  className="text-sm font-medium text-gray-600 hover:text-[#8b4513] transition-colors"
+                >
+                  Ảnh
+                </Link>
+                <Link
+                  href="/chat"
+                  className="text-sm font-medium text-gray-600 hover:text-[#8b4513] transition-colors"
+                >
+                  Trò Chuyện
+                </Link>
+              </>
+            )}
           </nav>
 
           {menu && <UserMenu name={menu.name} role={menu.role} />}

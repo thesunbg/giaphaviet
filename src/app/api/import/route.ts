@@ -19,6 +19,8 @@ interface ImportSpouse {
   isAlive?: boolean;
   occupation?: string;
   address?: string;
+  country?: string;
+  province?: string;
   biography?: string;
   graveInfo?: string;
   deathAnniversary?: string;
@@ -44,6 +46,8 @@ interface ImportMember {
   isAlive?: boolean;
   occupation?: string;
   address?: string;
+  country?: string;
+  province?: string;
   biography?: string;
   graveInfo?: string;
   deathAnniversary?: string;
@@ -106,6 +110,8 @@ async function importMember(
       isAlive: data.isAlive ?? true,
       occupation: data.occupation || null,
       address: data.address || null,
+      country: data.country || null,
+      province: data.province || null,
       biography: data.biography || null,
       graveInfo: data.graveInfo || null,
       deathAnniversary: data.deathAnniversary || null,
@@ -161,6 +167,8 @@ async function importMember(
           isAlive: spouseData.isAlive ?? true,
           occupation: spouseData.occupation || null,
           address: spouseData.address || null,
+          country: spouseData.country || null,
+          province: spouseData.province || null,
           biography: spouseData.biography || null,
           graveInfo: spouseData.graveInfo || null,
           deathAnniversary: spouseData.deathAnniversary || null,

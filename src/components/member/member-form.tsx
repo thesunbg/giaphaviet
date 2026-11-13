@@ -7,6 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { GENDER_OPTIONS, CALENDAR_TYPE_OPTIONS } from "@/lib/constants";
+import {
+  COUNTRY_OPTIONS,
+  PROVINCE_OPTIONS,
+  DEFAULT_COUNTRY,
+  isVietnam,
+} from "@/lib/provinces";
 import { DateInput } from "@/components/ui/date-input";
 import toast from "react-hot-toast";
 import type { MemberData, CalendarType } from "@/types/member";
@@ -32,6 +38,8 @@ export function MemberForm({ member }: MemberFormProps) {
     birthOrder: member?.birthOrder || 1,
     occupation: member?.occupation || "",
     address: member?.address || "",
+    country: member?.country || DEFAULT_COUNTRY,
+    province: member?.province || "",
     biography: member?.biography || "",
     graveInfo: member?.graveInfo || "",
     deathAnniversary: member?.deathAnniversary || "",
@@ -79,6 +87,8 @@ export function MemberForm({ member }: MemberFormProps) {
         deathDate: form.deathDate || null,
         occupation: form.occupation || null,
         address: form.address || null,
+        country: form.country || null,
+        province: form.province || null,
         biography: form.biography || null,
         graveInfo: form.graveInfo || null,
         deathAnniversary: form.deathAnniversary || null,
@@ -265,12 +275,41 @@ export function MemberForm({ member }: MemberFormProps) {
             placeholder="VD: Giáo viên"
           />
           <Input
-            label="Nơi ở"
+            label="Nơi ở (địa chỉ cụ thể)"
             id="address"
             value={form.address}
             onChange={(e) => updateField("address", e.target.value)}
-            placeholder="VD: Hà Nội"
+            placeholder="VD: Thôn Đông, xã Đồng Xuân"
           />
+          <Select
+            label="Quốc gia đang sinh sống"
+            id="country"
+            value={form.country}
+            onChange={(e) => {
+              updateField("country", e.target.value);
+              // Chuyển sang nước khác thì bỏ tỉnh/thành Việt Nam đã chọn
+              if (!isVietnam(e.target.value)) updateField("province", "");
+            }}
+            options={COUNTRY_OPTIONS}
+          />
+          {isVietnam(form.country) ? (
+            <Select
+              label="Tỉnh/Thành phố (sau sáp nhập 2025)"
+              id="province"
+              value={form.province}
+              onChange={(e) => updateField("province", e.target.value)}
+              options={PROVINCE_OPTIONS}
+              placeholder="-- Chọn tỉnh/thành phố --"
+            />
+          ) : (
+            <Input
+              label="Bang / Vùng / Thành phố"
+              id="province"
+              value={form.province}
+              onChange={(e) => updateField("province", e.target.value)}
+              placeholder="VD: California"
+            />
+          )}
         </div>
         <div className="mt-4">
           <Textarea

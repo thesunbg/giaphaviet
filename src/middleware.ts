@@ -13,7 +13,15 @@ const PUBLIC_PATHS = ["/dang-nhap", "/dang-ky", "/ma-xem", "/admin/login"];
 const PUBLIC_API_PREFIX = "/api/auth/";
 
 /** Khu vực chỉ dành cho tài khoản thật (mã xem chỉ được xem gia phả) */
-const MEMBER_ONLY_PATHS = ["/feed", "/chat", "/anh", "/api/feed", "/api/chat", "/api/photos"];
+const MEMBER_ONLY_PATHS = [
+  "/feed",
+  "/chat",
+  "/anh",
+  "/api/feed",
+  "/api/chat",
+  "/api/photos",
+  "/api/upload",
+];
 
 /** Khu vực quản trị */
 const ADMIN_PATHS = ["/admin", "/api/admin", "/api/import", "/api/export"];

@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { getSiteSettings } from "@/lib/settings";
 
 /**
  * Cấu trúc JSON export — tương thích hoàn toàn với API import (`/api/import`),
@@ -21,6 +22,8 @@ export interface ExportSpouse {
   isAlive: boolean;
   occupation?: string;
   address?: string;
+  country?: string;
+  province?: string;
   biography?: string;
   graveInfo?: string;
   deathAnniversary?: string;
@@ -75,6 +78,8 @@ type DbMember = {
   isAlive: boolean;
   occupation: string | null;
   address: string | null;
+  country: string | null;
+  province: string | null;
   biography: string | null;
   graveInfo: string | null;
   deathAnniversary: string | null;
@@ -105,6 +110,8 @@ function baseFields(m: DbMember, events: ExportEvent[]) {
     isAlive: m.isAlive,
     occupation: m.occupation ?? undefined,
     address: m.address ?? undefined,
+    country: m.country ?? undefined,
+    province: m.province ?? undefined,
     biography: m.biography ?? undefined,
     graveInfo: m.graveInfo ?? undefined,
     deathAnniversary: m.deathAnniversary ?? undefined,
@@ -288,10 +295,14 @@ export async function buildExportData(): Promise<ExportData | null> {
     if (node) otherRoots.push(node);
   }
 
+  const settings = await getSiteSettings();
   const surname = root.fullName.trim().split(/\s+/)[0];
 
   return clean({
-    familyName: `Họ ${surname}`,
+    familyName:
+      settings.familyName && settings.familyName !== "Gia Phả Việt"
+        ? settings.familyName
+        : `Họ ${surname}`,
     exportedAt: new Date().toISOString(),
     stats: {
       totalMembers: members.length,
@@ -351,6 +362,8 @@ export async function buildMembersCsv(): Promise<string> {
     "Lịch giỗ",
     "Nghề nghiệp",
     "Nơi ở",
+    "Tỉnh/Thành phố",
+    "Quốc gia",
     "Cha",
     "Mẹ",
     "Vợ/Chồng",
@@ -382,6 +395,8 @@ export async function buildMembersCsv(): Promise<string> {
       m.deathAnniversary ? calendar(m.deathAnniversaryType) : "",
       m.occupation,
       m.address,
+      m.province,
+      m.country,
       (fathersOf.get(m.id) || []).join(", "),
       (mothersOf.get(m.id) || []).join(", "),
       (spousesOf.get(m.id) || []).join(", "),

@@ -20,6 +20,10 @@ model Member {
   birthOrder            Int      @default(1)
   occupation            String?
   address               String?
+  /// Quốc gia đang sinh sống (mặc định Việt Nam)
+  country               String?  @default("Việt Nam")
+  /// Tỉnh/thành phố đang sinh sống (theo 34 đơn vị hành chính sau sáp nhập 2025)
+  province              String?
   biography             String?
   graveInfo             String?
   deathAnniversary      String?
@@ -36,9 +40,11 @@ model Member {
   events              Event[]
   photos              Photo[]
   account             User?
+  postsOnBehalf       Post[]        @relation("PostOnBehalfOf")
 
   @@index([generation])
   @@index([fullName])
+  @@index([province])
 }
 
 /// Tài khoản đăng nhập (con cháu trong dòng họ).
@@ -60,6 +66,12 @@ model User {
 
   member     Member?     @relation(fields: [memberId], references: [id], onDelete: SetNull)
   inviteCode InviteCode? @relation(fields: [inviteCodeId], references: [id], onDelete: SetNull)
+
+  posts        Post[]        @relation("PostAuthor")
+  comments     Comment[]     @relation("CommentAuthor")
+  reactions    Reaction[]    @relation("ReactionUser")
+  chatMessages ChatMessage[] @relation("ChatAuthor")
+  uploadedPhotos Photo[]     @relation("PhotoUploader")
 
   @@index([status])
   @@index([role])
@@ -137,14 +149,91 @@ model Event {
 }
 
 model Photo {
-  id        String   @id @default(cuid())
-  memberId  String
-  url       String
-  caption   String?
-  isProfile Boolean  @default(false)
-  createdAt DateTime @default(now())
+  id           String   @id @default(cuid())
+  memberId     String?
+  url          String
+  caption      String?
+  isProfile    Boolean  @default(false)
+  uploadedById String?
+  takenAt      String?
+  createdAt    DateTime @default(now())
 
-  member Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  member     Member? @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  uploadedBy User?   @relation("PhotoUploader", fields: [uploadedById], references: [id], onDelete: SetNull)
 
   @@index([memberId])
+  @@index([createdAt])
+}
+
+/// Bài đăng trên feed dòng họ
+model Post {
+  id                 String   @id @default(cuid())
+  authorId           String
+  content            String
+  images             String[] @default([])
+  type               String   @default("post") // "post" | "announcement"
+  /// Đăng thay mặt một người trong gia phả (vd: cháu đăng hộ cụ)
+  onBehalfOfMemberId String?
+  pinned             Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  author         User       @relation("PostAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  onBehalfOf     Member?    @relation("PostOnBehalfOf", fields: [onBehalfOfMemberId], references: [id], onDelete: SetNull)
+  comments       Comment[]
+  reactions      Reaction[]
+
+  @@index([createdAt])
+  @@index([authorId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  postId    String
+  authorId  String
+  content   String
+  createdAt DateTime @default(now())
+
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author User @relation("CommentAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([postId])
+}
+
+model Reaction {
+  id        String   @id @default(cuid())
+  postId    String
+  userId    String
+  emoji     String   @default("heart")
+  createdAt DateTime @default(now())
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User @relation("ReactionUser", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+  @@index([postId])
+}
+
+/// Tin nhắn trong phòng chat chung của dòng họ
+model ChatMessage {
+  id        String   @id @default(cuid())
+  authorId  String
+  content   String
+  createdAt DateTime @default(now())
+
+  author User @relation("ChatAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([createdAt])
+}
+
+/// Thông tin chung của dòng họ do quản trị viên khai báo (chỉ một bản ghi)
+model SiteSetting {
+  id             String   @id @default("default")
+  familyName     String   @default("Dòng họ")
+  treeTitle      String?
+  ancestralHome  String?
+  address        String?
+  description    String?
+  contactPhone   String?
+  updatedAt      DateTime @updatedAt
 }

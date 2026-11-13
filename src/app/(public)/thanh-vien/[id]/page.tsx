@@ -96,9 +96,12 @@ export default async function PublicMemberPage({
                   <Briefcase className="h-4 w-4 text-gray-400" /> {member.occupation}
                 </p>
               )}
-              {member.address && (
+              {(member.address || member.province || member.country) && (
                 <p className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-gray-400" /> {member.address}
+                  <MapPin className="h-4 w-4 text-gray-400" />
+                  {[member.address, member.province, member.country]
+                    .filter(Boolean)
+                    .join(", ")}
                 </p>
               )}
               {member.deathAnniversary && (

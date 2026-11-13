@@ -16,6 +16,8 @@ function toMemberData(m: Record<string, unknown>): MemberData {
     birthOrder: m.birthOrder as number,
     occupation: (m.occupation as string) || null,
     address: (m.address as string) || null,
+    country: (m.country as string) || null,
+    province: (m.province as string) || null,
     biography: (m.biography as string) || null,
     graveInfo: (m.graveInfo as string) || null,
     deathAnniversary: (m.deathAnniversary as string) || null,

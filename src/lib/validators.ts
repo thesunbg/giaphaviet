@@ -14,6 +14,8 @@ export const memberSchema = z.object({
   birthOrder: z.number().int().min(1).default(1),
   occupation: z.string().optional().nullable(),
   address: z.string().optional().nullable(),
+  country: z.string().optional().nullable(),
+  province: z.string().optional().nullable(),
   biography: z.string().optional().nullable(),
   graveInfo: z.string().optional().nullable(),
   deathAnniversary: z.string().optional().nullable(),

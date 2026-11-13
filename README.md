@@ -68,6 +68,21 @@ npm run create-admin -- "Nguyễn Văn A" 0912345678 matkhaucuaban
 - Tìm kiếm theo tên thành viên
 - Thẻ thống kê tổng số ngày giỗ, sinh nhật, sự kiện
 
+#### Bảng Tin Dòng Họ (`/feed`) — cần tài khoản
+- Đăng bài kèm ảnh (tối đa 10 ảnh/bài), thả tim, bình luận
+- Quản trị/biên tập đăng được **Thông báo** và ghim lên đầu bảng tin
+- Cột bên phải: **ngày giỗ, sinh nhật, sự kiện sắp tới trong 45 ngày**
+  - Ngày giỗ âm lịch được **quy đổi sang dương lịch** để biết còn bao nhiêu ngày
+- Mã xem gia phả (các cụ) không vào được khu vực này
+
+#### Album Ảnh Dòng Họ (`/anh`) — cần tài khoản
+- Mọi thành viên tải ảnh lên (giỗ chạp, họp họ, nhà thờ họ...), có chú thích
+- Xem ảnh lớn, xóa ảnh của mình (quản trị/biên tập xóa được mọi ảnh)
+- Ảnh gắn với thành viên sẽ hiện trong trang chi tiết của người đó
+
+#### Trò Chuyện Dòng Họ (`/chat`) — cần tài khoản
+- Phòng chat chung cho con cháu, tin nhắn mới tự cập nhật (5 giây/lần)
+
 #### Chi Tiết Thành Viên (`/thanh-vien/[id]`)
 - Ảnh đại diện (hoặc icon mặc định theo giới tính)
 - Thông tin: họ tên, năm sinh/mất, đời thứ, giới tính, nghề nghiệp, nơi ở
@@ -133,6 +148,10 @@ npm run create-admin -- "Nguyễn Văn A" 0912345678 matkhaucuaban
   - Mỗi thành viên một dòng, kèm tên cha, mẹ, vợ/chồng, ngày giỗ, nghề nghiệp, nơi ở
 - Hiển thị thống kê số thành viên / quan hệ / hôn nhân / sự kiện sẽ được export
 
+#### Thông Tin Dòng Họ (`/admin/cai-dat`) — chỉ quản trị
+- Tên dòng họ, tiêu đề cây gia phả, nhà thờ họ/từ đường, **địa chỉ cụ thể**, SĐT liên hệ, giới thiệu
+- Hiển thị ở đầu trang, trang cây gia phả và chân trang
+
 #### Tài Khoản (`/admin/tai-khoan`) — chỉ quản trị
 - Duyệt tài khoản mới đăng ký, khóa/mở khóa, đổi vai trò, đặt lại mật khẩu, xóa
 - Tạo sẵn tài khoản cho người trong họ
@@ -143,7 +162,7 @@ npm run create-admin -- "Nguyễn Văn A" 0912345678 matkhaucuaban
 - **Mã xem gia phả**: mã 6 chữ số cho các cụ, bật/tắt hoặc xóa bất cứ lúc nào
 
 #### Sidebar
-- Điều hướng: Tổng Quan, Thành Viên, Quan Hệ, Sự Kiện, Import JSON, Export JSON, Tài Khoản, Mã Mời
+- Điều hướng: Tổng Quan, Thành Viên, Quan Hệ, Sự Kiện, Import JSON, Export JSON, Tài Khoản, Mã Mời, Thông Tin Dòng Họ
 - Link "Xem Gia Phả" (mở trang công khai)
 - Nút **Đăng Xuất**
 
@@ -249,6 +268,7 @@ Script đọc trực tiếp file SQLite (cần Node >= 22) và xuất ra đúng 
    - **Sự Kiện**: Thêm sự kiện quan trọng cho thành viên
    - **Import JSON**: Import dữ liệu hàng loạt từ file JSON
    - **Export JSON**: Tải bản sao lưu toàn bộ gia phả (JSON) hoặc danh sách thành viên (CSV)
+   - **Thông Tin Dòng Họ**: Khai báo tên dòng họ, nhà thờ họ, địa chỉ
 4. Nhấn **Đăng Xuất** ở cuối sidebar khi hoàn tất
 
 ### Import JSON
@@ -402,6 +422,18 @@ giaphaviet/
 | GET/POST | `/api/admin/invites` | Danh sách / tạo mã mời | Admin |
 | GET/POST | `/api/admin/view-code` | Danh sách / tạo mã xem | Admin |
 
+### Tương tác nội bộ
+| Method | Endpoint | Mô tả | Auth |
+|--------|----------|-------|------|
+| GET/POST | `/api/feed` | Bảng tin: danh sách / đăng bài | Tài khoản |
+| PATCH/DELETE | `/api/feed/[id]` | Ghim / sửa / xóa bài | Tài khoản |
+| POST | `/api/feed/[id]/comments` | Bình luận | Tài khoản |
+| POST | `/api/feed/[id]/reactions` | Thả tim (bật/tắt) | Tài khoản |
+| GET/POST | `/api/chat` | Phòng chat chung | Tài khoản |
+| GET/POST | `/api/photos` | Album ảnh dòng họ | Tài khoản |
+| GET | `/api/anniversaries?days=45` | Ngày giỗ/sinh nhật sắp tới (quy đổi âm → dương) | Đã đăng nhập |
+| GET/PUT | `/api/admin/settings` | Thông tin dòng họ | Admin |
+
 ### Khác
 | Method | Endpoint | Mô tả | Auth |
 |--------|----------|-------|------|
@@ -430,6 +462,8 @@ giaphaviet/
 | generation | Int | Đời thứ mấy |
 | birthOrder | Int | Thứ tự trong gia đình |
 | occupation | String? | Nghề nghiệp |
+| country | String? | Quốc gia đang sinh sống (mặc định "Việt Nam") |
+| province | String? | Tỉnh/thành phố đang sinh sống — chọn từ **34 tỉnh/thành sau sáp nhập 2025** (Nghị quyết 202/2025/QH15) khi quốc gia là Việt Nam |
 | address | String? | Nơi ở |
 | biography | String? | Tiểu sử |
 | graveInfo | String? | Thông tin mộ phần |

@@ -2,14 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import { writeFile } from "fs/promises";
 import crypto from "crypto";
-import { requireEditor } from "@/lib/user-auth";
+import { requireUser } from "@/lib/user-auth";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 
 export async function POST(request: NextRequest) {
-  const authError = await requireEditor();
-  if (authError) return authError;
+  // Mọi tài khoản đã đăng nhập đều được tải ảnh lên (feed, album ảnh)
+  const user = await requireUser();
+  if (user instanceof Response) return user;
 
   const formData = await request.formData();
   const file = formData.get("file") as File | null;

@@ -13,6 +13,7 @@ import {
   Download,
   UserCog,
   Ticket,
+  Settings,
   TreePine,
   LogOut,
   Menu,
@@ -28,6 +29,7 @@ const navItems = [
   { href: "/admin/export", label: "Export JSON", icon: Download },
   { href: "/admin/tai-khoan", label: "Tài Khoản", icon: UserCog, adminOnly: true },
   { href: "/admin/ma-moi", label: "Mã Mời & Mã Xem", icon: Ticket, adminOnly: true },
+  { href: "/admin/cai-dat", label: "Thông Tin Dòng Họ", icon: Settings, adminOnly: true },
 ];
 
 interface AdminSidebarProps {

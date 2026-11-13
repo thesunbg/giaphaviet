@@ -13,6 +13,8 @@ export interface MemberData {
   birthOrder: number;
   occupation: string | null;
   address: string | null;
+  country?: string | null;
+  province?: string | null;
   biography: string | null;
   graveInfo: string | null;
   deathAnniversary: string | null;
