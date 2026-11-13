@@ -9,8 +9,7 @@
     "lint": "eslint",
     "seed": "npx tsx prisma/seed.ts",
     "create-admin": "npx tsx scripts/create-admin.ts",
-    "db:deploy": "prisma migrate deploy",
-    "postinstall": "prisma generate"
+    "db:deploy": "prisma migrate deploy"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"
