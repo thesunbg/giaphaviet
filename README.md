@@ -247,6 +247,41 @@ Script đọc trực tiếp file SQLite (cần Node >= 22) và xuất ra đúng 
 
 ---
 
+## Deploy
+
+Ứng dụng cần một cơ sở dữ liệu **PostgreSQL** (bản trước dùng SQLite nên khi nâng cấp phải tạo DB mới).
+
+Biến môi trường bắt buộc trên máy chủ:
+
+| Biến | Giá trị |
+|------|---------|
+| `DATABASE_URL` | `postgresql://user:password@host:5432/giaphaviet?schema=public` (dịch vụ cloud thường cần thêm `&sslmode=require`) |
+| `AUTH_SECRET` | Chuỗi ngẫu nhiên, tạo bằng `openssl rand -hex 32` |
+| `ADMIN_PASSWORD` | Mật khẩu lối vào dự phòng `/admin/login` |
+
+Lệnh build và chạy:
+
+```bash
+npm install     # postinstall tự chạy prisma generate
+npm run build   # prisma generate && next build
+npm run start   # prisma migrate deploy && next start  -> tự tạo/cập nhật bảng
+```
+
+`npm run start` tự chạy `prisma migrate deploy`, nên mỗi lần deploy các bảng mới (tài khoản, bảng tin, ảnh, cài đặt...) được tạo tự động. Nếu muốn chạy riêng: `npm run db:deploy`.
+
+### Lỗi thường gặp sau khi deploy
+
+| Hiện tượng | Nguyên nhân | Cách xử lý |
+|------------|-------------|------------|
+| Trang báo "Không tải được trang" / "Application error", log có `P2021 The table ... does not exist` | DB chưa có bảng (chưa migrate) | Chạy `npm run db:deploy` (hoặc deploy lại, vì `npm start` đã tự migrate) |
+| Log có `the URL must start with the protocol postgresql://` | `DATABASE_URL` còn trỏ SQLite (`file:./dev.db`) | Tạo DB PostgreSQL và sửa `DATABASE_URL` |
+| Log có `AUTH_SECRET environment variable is not set` | Thiếu biến môi trường | Đặt `AUTH_SECRET` rồi khởi động lại |
+| Vào trang nào cũng bị đẩy về `/dang-nhap` | Đúng thiết kế: toàn site yêu cầu đăng nhập | Tạo tài khoản quản trị: `npm run create-admin -- "Tên" 0912345678 matkhau` |
+| Đăng nhập được nhưng gia phả trống | DB mới chưa có dữ liệu | Vào `/admin/import` nạp file JSON (xem phần chuyển dữ liệu ở trên) |
+| Ảnh cũ không hiện | Thư mục `public/uploads` chưa được copy sang máy chủ mới | Copy thư mục này, hoặc gắn volume lưu trữ cố định |
+
+---
+
 ## Hướng Dẫn Sử Dụng
 
 ### Trang Công Khai
