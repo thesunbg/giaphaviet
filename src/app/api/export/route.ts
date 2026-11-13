@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAuth } from "@/lib/auth";
+import { requireEditor } from "@/lib/user-auth";
 import { buildExportData, buildMembersCsv } from "@/lib/export-builder";
 
 function timestamp(): string {
@@ -11,7 +11,7 @@ function timestamp(): string {
 }
 
 export async function GET(request: NextRequest) {
-  const authError = await requireAuth();
+  const authError = await requireEditor();
   if (authError) return authError;
 
   const format = (request.nextUrl.searchParams.get("format") || "json").toLowerCase();

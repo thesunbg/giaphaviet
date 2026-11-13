@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { marriageSchema } from "@/lib/validators";
-import { requireAuth } from "@/lib/auth";
+import { requireEditor } from "@/lib/user-auth";
 
 export async function POST(request: NextRequest) {
-  const authError = await requireAuth();
+  const authError = await requireEditor();
   if (authError) return authError;
 
   const body = await request.json();

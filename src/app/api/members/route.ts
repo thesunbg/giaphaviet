@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { memberSchema } from "@/lib/validators";
-import { requireAuth } from "@/lib/auth";
+import { requireEditor } from "@/lib/user-auth";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -12,7 +12,9 @@ export async function GET(request: NextRequest) {
 
   const where: Record<string, unknown> = {};
   if (search) {
-    where.fullName = { contains: search };
+    // PostgreSQL phân biệt hoa/thường với contains -> dùng insensitive
+    // để tìm kiếm giữ nguyên hành vi như bản SQLite cũ
+    where.fullName = { contains: search, mode: "insensitive" };
   }
   if (generation) {
     where.generation = parseInt(generation);
@@ -32,7 +34,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const authError = await requireAuth();
+  const authError = await requireEditor();
   if (authError) return authError;
 
   const body = await request.json();

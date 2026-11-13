@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { memberSchema } from "@/lib/validators";
-import { requireAuth } from "@/lib/auth";
+import { requireEditor } from "@/lib/user-auth";
 
 export async function GET(
   _request: NextRequest,
@@ -76,7 +76,7 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const authError = await requireAuth();
+  const authError = await requireEditor();
   if (authError) return authError;
 
   const { id } = await params;
@@ -102,7 +102,7 @@ export async function DELETE(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const authError = await requireAuth();
+  const authError = await requireEditor();
   if (authError) return authError;
 
   const { id } = await params;

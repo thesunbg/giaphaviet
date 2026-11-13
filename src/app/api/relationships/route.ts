@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { parentChildSchema } from "@/lib/validators";
-import { requireAuth } from "@/lib/auth";
+import { requireEditor } from "@/lib/user-auth";
 
 async function updateDescendantGenerations(memberId: string, generation: number) {
   const childLinks = await prisma.parentChild.findMany({
@@ -17,7 +17,7 @@ async function updateDescendantGenerations(memberId: string, generation: number)
 }
 
 export async function POST(request: NextRequest) {
-  const authError = await requireAuth();
+  const authError = await requireEditor();
   if (authError) return authError;
 
   const body = await request.json();

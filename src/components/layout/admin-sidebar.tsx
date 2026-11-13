@@ -11,6 +11,8 @@ import {
   CalendarDays,
   FileJson,
   Download,
+  UserCog,
+  Ticket,
   TreePine,
   LogOut,
   Menu,
@@ -24,10 +26,18 @@ const navItems = [
   { href: "/admin/su-kien", label: "Sự Kiện", icon: CalendarDays },
   { href: "/admin/import", label: "Import JSON", icon: FileJson },
   { href: "/admin/export", label: "Export JSON", icon: Download },
+  { href: "/admin/tai-khoan", label: "Tài Khoản", icon: UserCog, adminOnly: true },
+  { href: "/admin/ma-moi", label: "Mã Mời & Mã Xem", icon: Ticket, adminOnly: true },
 ];
 
-export function AdminSidebar() {
+interface AdminSidebarProps {
+  userName?: string;
+  isAdmin?: boolean;
+}
+
+export function AdminSidebar({ userName = "", isAdmin = true }: AdminSidebarProps) {
   const pathname = usePathname();
+  const items = navItems.filter((item) => isAdmin || !item.adminOnly);
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
   const [open, setOpen] = useState(false);
@@ -44,22 +54,22 @@ export function AdminSidebar() {
     setLoggingOut(true);
     try {
       await fetch("/api/auth/logout", { method: "POST" });
-      router.push("/admin/login");
+      router.push("/dang-nhap");
       router.refresh();
     } catch {
-      router.push("/admin/login");
+      router.push("/dang-nhap");
     }
   }
 
   const currentLabel =
-    navItems.find((item) =>
+    items.find((item) =>
       item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href)
     )?.label ?? "Quản Trị";
 
   const navContent = (
     <>
       <nav className="flex-1 space-y-1 p-4">
-        {navItems.map((item) => {
+        {items.map((item) => {
           const isActive =
             item.href === "/admin"
               ? pathname === "/admin"
@@ -83,6 +93,9 @@ export function AdminSidebar() {
         })}
       </nav>
       <div className="space-y-3 border-t border-gray-200 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+        {userName && (
+          <p className="truncate text-sm font-medium text-gray-700">{userName}</p>
+        )}
         <Link
           href="/gia-pha"
           onClick={() => setOpen(false)}

@@ -25,6 +25,30 @@ https://giaphahonguyen.app.nguyenvando.com/gia-pha
 
 ## Tính Năng
 
+### Đăng Nhập & Phân Quyền
+
+Toàn bộ site yêu cầu đăng nhập — người ngoài dòng họ không xem được gì ngoài trang đăng nhập.
+
+| Hình thức | Dành cho | Vào được | Ghi chú |
+|-----------|----------|----------|---------|
+| **Tài khoản cá nhân** (`/dang-nhap`) | Con cháu trong họ | Gia phả, lịch, thành viên (+ quản trị nếu có quyền) | Số điện thoại + mật khẩu |
+| **Mã xem gia phả** (`/ma-xem`) | Các cụ già, người không lập tài khoản | Chỉ xem gia phả, lịch, thành viên | Mã 6 chữ số, nhập một lần, thiết bị nhớ 1 năm |
+| **Mật khẩu quản trị cũ** (`/admin/login`) | Lối vào dự phòng | Toàn quyền quản trị | Dùng `ADMIN_PASSWORD`, nên chỉ giữ cho trường hợp khẩn cấp |
+
+**Vai trò tài khoản**: `admin` (toàn quyền, quản lý tài khoản & mã mời) · `editor` (sửa dữ liệu gia phả) · `member` (chỉ xem + tương tác).
+
+**Đăng ký**: người trong họ cần **mã mời** do quản trị phát (`/admin/ma-moi`), đăng ký xong quản trị duyệt tại `/admin/tai-khoan` (hoặc bật "tự động duyệt" trên mã mời).
+
+**Tạo tài khoản quản trị đầu tiên**:
+
+```bash
+npm run create-admin -- "Nguyễn Văn A" 0912345678 matkhaucuaban
+```
+
+> Người trong gia phả (`Member`) và tài khoản (`User`) là hai thứ tách biệt: 360 cụ trong gia phả không cần tài khoản nào. Một tài khoản có thể liên kết tới một người trong gia phả, nhưng không bắt buộc.
+
+---
+
 ### Trang Công Khai
 
 #### Cây Gia Phả (`/gia-pha`)
@@ -109,8 +133,17 @@ https://giaphahonguyen.app.nguyenvando.com/gia-pha
   - Mỗi thành viên một dòng, kèm tên cha, mẹ, vợ/chồng, ngày giỗ, nghề nghiệp, nơi ở
 - Hiển thị thống kê số thành viên / quan hệ / hôn nhân / sự kiện sẽ được export
 
+#### Tài Khoản (`/admin/tai-khoan`) — chỉ quản trị
+- Duyệt tài khoản mới đăng ký, khóa/mở khóa, đổi vai trò, đặt lại mật khẩu, xóa
+- Tạo sẵn tài khoản cho người trong họ
+- Luôn giữ ít nhất một quản trị đang hoạt động (không tự khóa/hạ quyền chính mình)
+
+#### Mã Mời & Mã Xem (`/admin/ma-moi`) — chỉ quản trị
+- **Mã mời**: tạo mã cho người trong họ tự đăng ký (giới hạn lượt dùng, hạn dùng, tùy chọn tự động duyệt)
+- **Mã xem gia phả**: mã 6 chữ số cho các cụ, bật/tắt hoặc xóa bất cứ lúc nào
+
 #### Sidebar
-- Điều hướng: Tổng Quan, Thành Viên, Quan Hệ, Sự Kiện, Import JSON, Export JSON
+- Điều hướng: Tổng Quan, Thành Viên, Quan Hệ, Sự Kiện, Import JSON, Export JSON, Tài Khoản, Mã Mời
 - Link "Xem Gia Phả" (mở trang công khai)
 - Nút **Đăng Xuất**
 
@@ -356,6 +389,18 @@ giaphaviet/
 | POST | `/api/events` | Thêm sự kiện | Required |
 | PUT | `/api/events/[id]` | Cập nhật sự kiện | Required |
 | DELETE | `/api/events/[id]` | Xóa sự kiện | Required |
+
+### Tài khoản
+| Method | Endpoint | Mô tả | Auth |
+|--------|----------|-------|------|
+| POST | `/api/auth/login` | Đăng nhập (SĐT + mật khẩu) | - |
+| POST | `/api/auth/register` | Đăng ký bằng mã mời | - |
+| POST | `/api/auth/view-code` | Vào bằng mã xem gia phả | - |
+| POST | `/api/auth/logout` | Đăng xuất | - |
+| GET/POST | `/api/admin/users` | Danh sách / tạo tài khoản | Admin |
+| PATCH/DELETE | `/api/admin/users/[id]` | Duyệt, khóa, đổi vai trò, xóa | Admin |
+| GET/POST | `/api/admin/invites` | Danh sách / tạo mã mời | Admin |
+| GET/POST | `/api/admin/view-code` | Danh sách / tạo mã xem | Admin |
 
 ### Khác
 | Method | Endpoint | Mô tả | Auth |

@@ -35,9 +35,60 @@ model Member {
   marriagesAsSpouse2  Marriage[]    @relation("Spouse2Relation")
   events              Event[]
   photos              Photo[]
+  account             User?
 
   @@index([generation])
   @@index([fullName])
+}
+
+/// Tài khoản đăng nhập (con cháu trong dòng họ).
+/// Tách khỏi Member: người trong gia phả không bắt buộc có tài khoản.
+model User {
+  id           String    @id @default(cuid())
+  phone        String    @unique
+  name         String
+  passwordHash String
+  role         String    @default("member") // "admin" | "editor" | "member"
+  status       String    @default("pending") // "pending" | "active" | "blocked"
+  avatarUrl    String?
+  note         String?
+  memberId     String?   @unique
+  inviteCodeId String?
+  lastSeenAt   DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  member     Member?     @relation(fields: [memberId], references: [id], onDelete: SetNull)
+  inviteCode InviteCode? @relation(fields: [inviteCodeId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([role])
+}
+
+/// Mã mời do quản trị phát cho người trong họ để đăng ký tài khoản.
+model InviteCode {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  note        String?
+  maxUses     Int       @default(1)
+  usedCount   Int       @default(0)
+  autoApprove Boolean   @default(false)
+  expiresAt   DateTime?
+  createdById String?
+  createdAt   DateTime  @default(now())
+
+  users User[]
+}
+
+/// Mã xem gia phả (chỉ xem) cho các cụ / người không lập tài khoản.
+model ViewAccessCode {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  label     String?
+  isActive  Boolean  @default(true)
+  lastUsedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model ParentChild {
