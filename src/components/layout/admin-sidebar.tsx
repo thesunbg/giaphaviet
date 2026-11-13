@@ -10,6 +10,7 @@ import {
   GitBranch,
   CalendarDays,
   FileJson,
+  Download,
   TreePine,
   LogOut,
   Menu,
@@ -22,6 +23,7 @@ const navItems = [
   { href: "/admin/quan-he", label: "Quan Hệ", icon: GitBranch },
   { href: "/admin/su-kien", label: "Sự Kiện", icon: CalendarDays },
   { href: "/admin/import", label: "Import JSON", icon: FileJson },
+  { href: "/admin/export", label: "Export JSON", icon: Download },
 ];
 
 export function AdminSidebar() {
