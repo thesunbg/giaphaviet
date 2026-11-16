@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { memberSchema } from "@/lib/validators";
 import { requireEditor } from "@/lib/user-auth";
+import { foldVietnamese } from "@/lib/utils";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -11,13 +12,26 @@ export async function GET(request: NextRequest) {
   const limit = parseInt(searchParams.get("limit") || "50");
 
   const where: Record<string, unknown> = {};
-  if (search) {
-    // PostgreSQL phân biệt hoa/thường với contains -> dùng insensitive
-    // để tìm kiếm giữ nguyên hành vi như bản SQLite cũ
-    where.fullName = { contains: search, mode: "insensitive" };
-  }
   if (generation) {
     where.generation = parseInt(generation);
+  }
+
+  // Tìm theo tên: bỏ dấu, không phân biệt hoa/thường ("nguyen van do" ra "Nguyễn Văn Đô").
+  // Lọc trong bộ nhớ vì số thành viên của một dòng họ không lớn.
+  if (search.trim()) {
+    const all = await prisma.member.findMany({
+      where,
+      orderBy: [{ generation: "asc" }, { birthOrder: "asc" }],
+    });
+    const needle = foldVietnamese(search);
+    const matched = all.filter((m) => foldVietnamese(m.fullName).includes(needle));
+
+    return NextResponse.json({
+      data: matched.slice((page - 1) * limit, page * limit),
+      total: matched.length,
+      page,
+      limit,
+    });
   }
 
   const [data, total] = await Promise.all([

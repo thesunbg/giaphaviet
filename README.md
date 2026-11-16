@@ -68,6 +68,12 @@ npm run create-admin -- "Nguyễn Văn A" 0912345678 matkhaucuaban
 - Tìm kiếm theo tên thành viên
 - Thẻ thống kê tổng số ngày giỗ, sinh nhật, sự kiện
 
+#### Tìm Kiếm (`/tim-kiem`)
+- Tra cứu người trong dòng họ theo tên, **gõ không dấu cũng ra** ("nguyen van do" → Nguyễn Văn Độ)
+- Xếp theo độ khớp: trùng đúng tên → trùng tên gọi → tên bắt đầu bằng → khớp các từ → chứa chuỗi
+- Mỗi kết quả kèm **thông tin liên quan gần nhất**: đời, năm sinh/mất, cha mẹ, vợ/chồng, số con, nơi ở
+- Cũng tìm được theo nghề nghiệp, tỉnh/thành, nơi ở, ghi chú
+
 #### Bảng Tin Dòng Họ (`/feed`) — cần tài khoản
 - Đăng bài kèm ảnh (tối đa 10 ảnh/bài), thả tim, bình luận
 - Quản trị/biên tập đăng được **Thông báo** và ghim lên đầu bảng tin
@@ -466,6 +472,7 @@ giaphaviet/
 | POST | `/api/feed/[id]/reactions` | Thả tim (bật/tắt) | Tài khoản |
 | GET/POST | `/api/chat` | Phòng chat chung | Tài khoản |
 | GET/POST | `/api/photos` | Album ảnh dòng họ | Tài khoản |
+| GET | `/api/search?q=...` | Tìm thành viên (bỏ dấu, xếp hạng) | Đã đăng nhập |
 | GET | `/api/anniversaries?days=45` | Ngày giỗ/sinh nhật sắp tới (quy đổi âm → dương) | Đã đăng nhập |
 | GET/PUT | `/api/admin/settings` | Thông tin dòng họ | Admin |
 

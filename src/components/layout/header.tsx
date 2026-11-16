@@ -39,6 +39,12 @@ export async function Header() {
               Cây Gia Phả
             </Link>
             <Link
+              href="/tim-kiem"
+              className="text-sm font-medium text-gray-600 hover:text-[#8b4513] transition-colors"
+            >
+              Tìm Kiếm
+            </Link>
+            <Link
               href="/lich"
               className="text-sm font-medium text-gray-600 hover:text-[#8b4513] transition-colors"
             >

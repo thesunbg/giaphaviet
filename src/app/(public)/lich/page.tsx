@@ -80,40 +80,33 @@ export default async function CalendarPage() {
   }));
 
   return (
-    <div className="mx-auto max-w-4xl p-4 sm:p-6">
-      <div className="mb-4 sm:mb-6">
-        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <Calendar className="h-6 w-6 sm:h-7 sm:w-7 text-[#8b4513]" />
+    <div className="mx-auto max-w-4xl px-4 py-3 sm:p-6">
+      <div className="mb-3 sm:mb-6">
+        <h1 className="flex items-center gap-2 text-lg font-bold text-gray-900 sm:text-2xl">
+          <Calendar className="h-5 w-5 text-[#8b4513] sm:h-7 sm:w-7" />
           Lịch Gia Đình
         </h1>
-        <p className="mt-1 text-sm text-gray-500">
+        {/* Mô tả dài chỉ hiện trên màn hình lớn cho đỡ chật */}
+        <p className="mt-1 hidden text-sm text-gray-500 sm:block">
           Tổng hợp các ngày giỗ, sinh nhật và sự kiện quan trọng trong dòng họ
         </p>
       </div>
 
-      {/* Stats */}
-      <div className="mb-4 grid grid-cols-3 gap-2 sm:mb-6 sm:gap-4">
-        <Card className="text-center !p-3 sm:!p-6">
-          <div className="flex flex-col items-center">
-            <BookOpen className="h-6 w-6 text-purple-500 mb-1" />
-            <p className="text-xl sm:text-2xl font-bold text-gray-900">{anniversaries.length}</p>
-            <p className="text-xs text-gray-500">Ngày giỗ</p>
-          </div>
-        </Card>
-        <Card className="text-center !p-3 sm:!p-6">
-          <div className="flex flex-col items-center">
-            <Cake className="h-6 w-6 text-green-500 mb-1" />
-            <p className="text-xl sm:text-2xl font-bold text-gray-900">{birthdays.length}</p>
-            <p className="text-xs text-gray-500">Sinh nhật</p>
-          </div>
-        </Card>
-        <Card className="text-center !p-3 sm:!p-6">
-          <div className="flex flex-col items-center">
-            <Star className="h-6 w-6 text-blue-500 mb-1" />
-            <p className="text-xl sm:text-2xl font-bold text-gray-900">{eventItems.length}</p>
-            <p className="text-xs text-gray-500">Sự kiện</p>
-          </div>
-        </Card>
+      {/* Thống kê: trên điện thoại gom thành một hàng gọn */}
+      <div className="mb-3 grid grid-cols-3 gap-2 sm:mb-6 sm:gap-4">
+        {[
+          { icon: BookOpen, color: "text-purple-500", value: anniversaries.length, label: "Ngày giỗ" },
+          { icon: Cake, color: "text-green-500", value: birthdays.length, label: "Sinh nhật" },
+          { icon: Star, color: "text-blue-500", value: eventItems.length, label: "Sự kiện" },
+        ].map((stat) => (
+          <Card key={stat.label} className="!p-2.5 text-center sm:!p-6">
+            <div className="flex items-center justify-center gap-2 sm:flex-col sm:gap-0">
+              <stat.icon className={`h-4 w-4 shrink-0 sm:mb-1 sm:h-6 sm:w-6 ${stat.color}`} />
+              <p className="text-base font-bold text-gray-900 sm:text-2xl">{stat.value}</p>
+              <p className="text-[11px] text-gray-500 sm:text-xs">{stat.label}</p>
+            </div>
+          </Card>
+        ))}
       </div>
 
       {/* Calendar List with filters */}

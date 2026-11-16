@@ -10,13 +10,16 @@ export default async function PublicLayout({
 }) {
   const viewer = await getViewer();
   const isMember = viewer?.kind === "user" || viewer?.kind === "legacy-admin";
+  const isStaff =
+    viewer?.kind === "legacy-admin" ||
+    (viewer?.kind === "user" && (viewer.user.role === "admin" || viewer.user.role === "editor"));
 
   return (
     <div className="flex min-h-dvh flex-col">
       <Header />
       <main className="mobile-nav-pad flex-1">{children}</main>
       <Footer />
-      <MobileNav isMember={isMember} />
+      <MobileNav isMember={isMember} isStaff={isStaff} />
     </div>
   );
 }

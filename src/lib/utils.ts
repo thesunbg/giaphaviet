@@ -6,6 +6,18 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/** Bỏ dấu tiếng Việt để tìm kiếm: "Nguyễn Văn Đô" -> "nguyen van do" */
+export function foldVietnamese(input: string): string {
+  return input
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 export function formatDate(dateStr: string | null | undefined): string {
   if (!dateStr) return "";
   return dateStr;
@@ -40,16 +52,16 @@ export function getLifeSpan(
  */
 export function searchTree(node: TreeNode, query: string): Set<string> {
   const matched = new Set<string>();
-  const q = query.toLowerCase().trim();
+  const q = foldVietnamese(query);
   if (!q) return matched;
 
   function traverse(n: TreeNode) {
-    if (n.member.fullName.toLowerCase().includes(q)) {
+    if (foldVietnamese(n.member.fullName).includes(q)) {
       matched.add(n.member.id);
     }
     // Also search spouses
     for (const spouse of n.spouses) {
-      if (spouse.member.fullName.toLowerCase().includes(q)) {
+      if (foldVietnamese(spouse.member.fullName).includes(q)) {
         matched.add(spouse.member.id);
       }
     }
