@@ -109,9 +109,9 @@ export async function GET(request: NextRequest) {
   events.forEach((ev) =>
     push(
       "event",
-      ev.member.id,
-      ev.member.fullName,
-      ev.member.generation,
+      ev.member?.id || "",
+      ev.member?.fullName || "Cả dòng họ",
+      ev.member?.generation ?? 0,
       ev.title,
       ev.date,
       ev.calendarType || "solar"

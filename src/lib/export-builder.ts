@@ -143,6 +143,8 @@ export async function buildExportData(): Promise<ExportData | null> {
   // memberId -> danh sách sự kiện
   const eventsOf = new Map<string, ExportEvent[]>();
   events.forEach((e) => {
+    // Sự kiện chung của dòng họ không gắn với thành viên nào -> không nằm trong cây export
+    if (!e.memberId) return;
     const list = eventsOf.get(e.memberId) || [];
     list.push(
       clean({

@@ -38,11 +38,13 @@ export const marriageSchema = z.object({
 });
 
 export const eventSchema = z.object({
-  memberId: z.string().min(1, "Vui lòng chọn thành viên"),
+  // Bỏ trống = sự kiện chung của cả dòng họ (giỗ tổ, họp họ...)
+  memberId: z.string().optional().nullable(),
   title: z.string().min(1, "Tên sự kiện không được để trống"),
   date: z.string().optional().nullable(),
   calendarType: calendarTypeEnum.default("solar"),
   description: z.string().optional().nullable(),
+  location: z.string().optional().nullable(),
 });
 
 export type MemberFormData = z.infer<typeof memberSchema>;

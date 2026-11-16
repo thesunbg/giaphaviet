@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
   }
 
   const event = await prisma.event.create({
-    data: parsed.data,
+    data: { ...parsed.data, memberId: parsed.data.memberId || null },
   });
 
   return NextResponse.json({ data: event }, { status: 201 });

@@ -17,9 +17,13 @@ const MEMBER_ONLY_PATHS = [
   "/feed",
   "/chat",
   "/anh",
+  "/quy-ho",
   "/api/feed",
   "/api/chat",
   "/api/photos",
+  "/api/albums",
+  "/api/funds",
+  "/api/contributions",
   "/api/upload",
 ];
 

@@ -20,13 +20,15 @@ interface Props {
     date: string | null;
     calendarType: string | null;
     description: string | null;
-    member: { id: string; fullName: string };
+    member: { id: string; fullName: string } | null;
+    location?: string | null;
   }>;
 }
 
 export function EventManager({ members, events }: Props) {
   const router = useRouter();
   const [memberId, setMemberId] = useState("");
+  const [location, setLocation] = useState("");
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [calendarType, setCalendarType] = useState("solar");
@@ -39,8 +41,8 @@ export function EventManager({ members, events }: Props) {
   }));
 
   async function addEvent() {
-    if (!memberId || !title) {
-      toast.error("Vui lòng chọn thành viên và nhập tên sự kiện");
+    if (!title) {
+      toast.error("Vui lòng nhập tên sự kiện");
       return;
     }
     setLoading(true);
@@ -49,17 +51,19 @@ export function EventManager({ members, events }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          memberId,
+          memberId: memberId || null,
           title,
           date: date || null,
           calendarType,
           description: description || null,
+          location: location || null,
         }),
       });
       if (!res.ok) throw new Error("Lỗi khi thêm sự kiện");
       toast.success("Thêm sự kiện thành công!");
       setTitle("");
       setDate("");
+      setLocation("");
       setCalendarType("solar");
       setDescription("");
       router.refresh();
@@ -85,12 +89,15 @@ export function EventManager({ members, events }: Props) {
         <h2 className="mb-4 text-lg font-semibold text-gray-900">Thêm sự kiện mới</h2>
         <div className="space-y-3">
           <Select
-            label="Thành viên"
+            label="Thành viên (không bắt buộc)"
             options={memberOptions}
             value={memberId}
             onChange={(e) => setMemberId(e.target.value)}
-            placeholder="-- Chọn thành viên --"
+            placeholder="-- Sự kiện chung của dòng họ --"
           />
+          <p className="-mt-2 text-xs text-gray-500">
+            Để trống nếu là sự kiện chung: giỗ tổ, họp họ, xây từ đường...
+          </p>
           <Input
             label="Tên sự kiện *"
             value={title}
@@ -119,6 +126,12 @@ export function EventManager({ members, events }: Props) {
               </select>
             </div>
           </div>
+          <Input
+            label="Địa điểm"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="VD: Từ đường họ Nguyễn"
+          />
           <Textarea
             label="Mô tả"
             value={description}
@@ -149,7 +162,8 @@ export function EventManager({ members, events }: Props) {
                 <div>
                   <p className="font-medium text-gray-900">{ev.title}</p>
                   <p className="text-xs text-gray-500">
-                    {ev.member.fullName}
+                    {ev.member ? ev.member.fullName : "Sự kiện chung của dòng họ"}
+                    {ev.location && ` • ${ev.location}`}
                     {ev.date && (
                       <span>
                         {" "}&bull; {ev.date}{" "}

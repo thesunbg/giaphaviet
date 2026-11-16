@@ -8,18 +8,23 @@ export async function GET(request: NextRequest) {
   if (user instanceof Response) return user;
 
   const memberId = request.nextUrl.searchParams.get("memberId");
+  const albumId = request.nextUrl.searchParams.get("albumId");
+  // ?albumId=none -> ảnh chưa thuộc album nào
+  const albumFilter =
+    albumId === "none" ? { albumId: null } : albumId ? { albumId } : {};
 
   const photos = await prisma.photo.findMany({
-    where: memberId ? { memberId } : {},
+    where: { ...(memberId ? { memberId } : {}), ...albumFilter },
     orderBy: { createdAt: "desc" },
     take: 200,
     include: {
       member: { select: { id: true, fullName: true } },
       uploadedBy: { select: { id: true, name: true } },
+      album: { select: { id: true, name: true } },
     },
   });
 
-  return NextResponse.json({ data: photos, currentUserId: user.id });
+  return NextResponse.json({ data: photos, currentUserId: user.id, role: user.role });
 }
 
 export async function POST(request: NextRequest) {
@@ -44,6 +49,7 @@ export async function POST(request: NextRequest) {
           url,
           caption: body.caption ? String(body.caption).trim() : null,
           memberId: body.memberId || null,
+          albumId: body.albumId || null,
           takenAt: body.takenAt ? String(body.takenAt).trim() : null,
           uploadedById: user.id,
         },

@@ -9,7 +9,8 @@ import { BookOpen, Cake, Star, Calendar, Search, X } from "lucide-react";
 
 export interface CalendarItem {
   type: "anniversary" | "birthday" | "event";
-  memberId: string;
+  /** null = sự kiện chung của cả dòng họ, không gắn với thành viên nào */
+  memberId: string | null;
   memberName: string;
   generation: number;
   date: string | null;
@@ -255,12 +256,11 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
                   const parsed = parseDate(item.date);
                   const dayDisplay = parsed?.day ? `Ngày ${parsed.day}` : null;
 
-                  return (
-                    <Link
-                      key={`${item.type}-${item.memberId}-${i}`}
-                      href={`/thanh-vien/${item.memberId}`}
-                      className="flex items-center justify-between gap-2 rounded-lg border border-gray-100 bg-white p-3 hover:bg-gray-50 active:bg-gray-50 transition-colors sm:p-4"
-                    >
+                  const rowClass =
+                    "flex items-center justify-between gap-2 rounded-lg border border-gray-100 bg-white p-3 transition-colors hover:bg-gray-50 active:bg-gray-50 sm:p-4";
+
+                  const rowContent = (
+                    <>
                       <div className="flex min-w-0 items-center gap-3">
                         <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${getTypeIconBg(item.type)}`}>
                           {getTypeIcon(item.type)}
@@ -292,8 +292,23 @@ export function CalendarList({ anniversaries, birthdays, events }: CalendarListP
                           )}
                         </div>
                       </div>
-                      <Badge className={genColor + " text-xs shrink-0 ml-2"}>{`Đời ${item.generation}`}</Badge>
+                      {item.generation > 0 && (
+                        <Badge className={genColor + " text-xs shrink-0 ml-2"}>{`Đời ${item.generation}`}</Badge>
+                      )}
+                    </>
+                  );
+
+                  const key = `${item.type}-${item.memberId}-${i}`;
+
+                  // Sự kiện chung của dòng họ không có trang thành viên để mở
+                  return item.memberId ? (
+                    <Link key={key} href={`/thanh-vien/${item.memberId}`} className={rowClass}>
+                      {rowContent}
                     </Link>
+                  ) : (
+                    <div key={key} className={rowClass}>
+                      {rowContent}
+                    </div>
                   );
                 })}
               </div>

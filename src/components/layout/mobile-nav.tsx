@@ -9,6 +9,7 @@ import {
   Newspaper,
   Images,
   MessagesSquare,
+  Wallet,
   Search,
   MoreHorizontal,
   Settings,
@@ -42,6 +43,7 @@ export function MobileNav({ isMember = false, isStaff = false }: MobileNavProps)
       ? [
           { href: "/anh", label: "Album ảnh dòng họ", icon: Images },
           { href: "/chat", label: "Trò chuyện dòng họ", icon: MessagesSquare },
+          { href: "/quy-ho", label: "Quỹ dòng họ", icon: Wallet },
         ]
       : []),
     ...(isStaff ? [{ href: "/admin", label: "Trang quản trị", icon: Settings }] : []),

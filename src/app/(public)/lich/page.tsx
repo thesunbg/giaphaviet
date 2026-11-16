@@ -70,9 +70,9 @@ export default async function CalendarPage() {
 
   const eventItems: CalendarItem[] = events.map((ev) => ({
     type: "event",
-    memberId: ev.member.id,
-    memberName: ev.member.fullName,
-    generation: ev.member.generation,
+    memberId: ev.member?.id || null,
+    memberName: ev.member?.fullName || "Cả dòng họ",
+    generation: ev.member?.generation ?? 0,
     date: ev.date,
     calendarType: ev.calendarType || "solar",
     label: ev.title,

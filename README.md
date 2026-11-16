@@ -82,9 +82,19 @@ npm run create-admin -- "Nguyễn Văn A" 0912345678 matkhaucuaban
 - Mã xem gia phả (các cụ) không vào được khu vực này
 
 #### Album Ảnh Dòng Họ (`/anh`) — cần tài khoản
-- Mọi thành viên tải ảnh lên (giỗ chạp, họp họ, nhà thờ họ...), có chú thích
+- **Tạo album theo dịp** (giỗ tổ 2026, họp họ, xây từ đường...) với tên, ngày, mô tả
+- Tải **nhiều ảnh một lần** vào album, có thanh tiến trình từng ảnh
+- Mục **Ảnh lẻ** gom ảnh chưa xếp album; xóa album thì ảnh chuyển về đây chứ không mất
 - Xem ảnh lớn, xóa ảnh của mình (quản trị/biên tập xóa được mọi ảnh)
 - Ảnh gắn với thành viên sẽ hiện trong trang chi tiết của người đó
+
+#### Quỹ Dòng Họ (`/quy-ho`) — cần tài khoản
+- Nhiều **đợt đóng góp** (giỗ tổ, tu sửa từ đường, khuyến học...), mỗi đợt có mục tiêu và thanh tiến độ
+- **Sổ đóng góp dạng bảng như Excel**: họ tên, số tiền, ngày đóng, hình thức, ghi chú; tổng cộng ở cuối
+- Nhập nhanh từng dòng (Enter là xong, giữ lại ngày để nhập dòng kế tiếp)
+- **Dán từ Excel**: copy nhiều dòng trong Excel rồi dán một lần, dòng lỗi được báo riêng
+- **Xuất Excel (CSV)** cả sổ, có dòng tổng cộng, UTF-8 cho tiếng Việt
+- Mọi thành viên xem được (công khai trong họ), chỉ quản trị/biên tập mới ghi sổ và sửa
 
 #### Trò Chuyện Dòng Họ (`/chat`) — cần tài khoản
 - Phòng chat chung cho con cháu, tin nhắn mới tự cập nhật (5 giây/lần)
@@ -136,7 +146,9 @@ npm run create-admin -- "Nguyễn Văn A" 0912345678 matkhaucuaban
 - Danh sách tất cả quan hệ với nút xóa
 
 #### Quản Lý Sự Kiện (`/admin/su-kien`)
-- Thêm sự kiện: chọn thành viên, tiêu đề, ngày, loại lịch (âm/dương), mô tả
+- Thêm sự kiện: tiêu đề, ngày, loại lịch (âm/dương), địa điểm, mô tả
+- **Thành viên không bắt buộc**: để trống là sự kiện chung của cả dòng họ (giỗ tổ, họp họ),
+  trên lịch hiển thị là "Cả dòng họ"
 - Danh sách sự kiện với nút xóa
 
 #### Import JSON (`/admin/import`)
@@ -264,6 +276,7 @@ Biến môi trường bắt buộc trên máy chủ:
 | `DATABASE_URL` | `postgresql://user:password@host:5432/giaphaviet?schema=public` (dịch vụ cloud thường cần thêm `&sslmode=require`) |
 | `AUTH_SECRET` | Chuỗi ngẫu nhiên, tạo bằng `openssl rand -hex 32` |
 | `ADMIN_PASSWORD` | Mật khẩu lối vào dự phòng `/admin/login` |
+| `UPLOAD_DIR` | (tùy chọn) Thư mục lưu ảnh tải lên. Nên trỏ vào volume để ảnh không mất khi deploy lại |
 
 Lệnh build và chạy:
 
@@ -284,7 +297,8 @@ npm run start   # prisma migrate deploy && next start  -> tự tạo/cập nhậ
 | Log có `AUTH_SECRET environment variable is not set` | Thiếu biến môi trường | Đặt `AUTH_SECRET` rồi khởi động lại |
 | Vào trang nào cũng bị đẩy về `/dang-nhap` | Đúng thiết kế: toàn site yêu cầu đăng nhập | Tạo tài khoản quản trị: `npm run create-admin -- "Tên" 0912345678 matkhau` |
 | Đăng nhập được nhưng gia phả trống | DB mới chưa có dữ liệu | Vào `/admin/import` nạp file JSON (xem phần chuyển dữ liệu ở trên) |
-| Ảnh cũ không hiện | Thư mục `public/uploads` chưa được copy sang máy chủ mới | Copy thư mục này, hoặc gắn volume lưu trữ cố định |
+| Ảnh tải lên bị vỡ / không hiện | Ảnh được phục vụ qua `/api/uploads/...`; nếu vẫn lỗi thì thư mục lưu ảnh không ghi được | Đặt `UPLOAD_DIR` trỏ vào thư mục có quyền ghi |
+| Ảnh biến mất sau khi deploy lại | Ảnh nằm trong container, bị xóa khi build lại | Gắn volume và đặt `UPLOAD_DIR="/data/uploads"` |
 
 ---
 
@@ -471,7 +485,14 @@ giaphaviet/
 | POST | `/api/feed/[id]/comments` | Bình luận | Tài khoản |
 | POST | `/api/feed/[id]/reactions` | Thả tim (bật/tắt) | Tài khoản |
 | GET/POST | `/api/chat` | Phòng chat chung | Tài khoản |
-| GET/POST | `/api/photos` | Album ảnh dòng họ | Tài khoản |
+| GET/POST | `/api/photos` | Ảnh (lọc theo album/thành viên) | Tài khoản |
+| GET/POST | `/api/albums` | Album ảnh: danh sách / tạo | Tài khoản |
+| GET/PATCH/DELETE | `/api/albums/[id]` | Chi tiết, sửa, xóa album | Tài khoản |
+| GET/POST | `/api/funds` | Đợt đóng góp: danh sách / tạo | Xem: tài khoản · Tạo: Editor |
+| GET/PATCH/DELETE | `/api/funds/[id]` | Chi tiết, sửa, xóa đợt | Editor |
+| POST | `/api/funds/[id]/contributions` | Ghi sổ (1 dòng hoặc nhiều dòng) | Editor |
+| GET | `/api/funds/[id]/export` | Xuất sổ đóng góp ra CSV | Tài khoản |
+| PATCH/DELETE | `/api/contributions/[id]` | Sửa / xóa một dòng trong sổ | Editor |
 | GET | `/api/search?q=...` | Tìm thành viên (bỏ dấu, xếp hạng) | Đã đăng nhập |
 | GET | `/api/anniversaries?days=45` | Ngày giỗ/sinh nhật sắp tới (quy đổi âm → dương) | Đã đăng nhập |
 | GET/PUT | `/api/admin/settings` | Thông tin dòng họ | Admin |
@@ -481,7 +502,8 @@ giaphaviet/
 |--------|----------|-------|------|
 | GET | `/api/tree` | Cây gia phả (đệ quy) | - |
 | GET | `/api/calendar` | Lịch tổng hợp | - |
-| POST | `/api/upload` | Upload ảnh (max 5MB) | Required |
+| POST | `/api/upload` | Upload ảnh (max 5MB) | Tài khoản |
+| GET | `/api/uploads/[file]` | Xem ảnh đã tải lên | Đã đăng nhập |
 | POST | `/api/import` | Import JSON (xóa dữ liệu cũ) | Required |
 | GET | `/api/export?format=json` | Export toàn bộ gia phả (JSON, import lại được) | Required |
 | GET | `/api/export?format=csv` | Export danh sách thành viên (CSV cho Excel) | Required |

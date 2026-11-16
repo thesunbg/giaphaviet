@@ -40,7 +40,8 @@ model Member {
   events              Event[]
   photos              Photo[]
   account             User?
-  postsOnBehalf       Post[]        @relation("PostOnBehalfOf")
+  postsOnBehalf       Post[]         @relation("PostOnBehalfOf")
+  contributions       Contribution[] @relation("MemberContributions")
 
   @@index([generation])
   @@index([fullName])
@@ -71,7 +72,10 @@ model User {
   comments     Comment[]     @relation("CommentAuthor")
   reactions    Reaction[]    @relation("ReactionUser")
   chatMessages ChatMessage[] @relation("ChatAuthor")
-  uploadedPhotos Photo[]     @relation("PhotoUploader")
+  uploadedPhotos Photo[]        @relation("PhotoUploader")
+  albums         Album[]        @relation("AlbumCreator")
+  funds          Fund[]         @relation("FundCreator")
+  contributions  Contribution[] @relation("ContributionRecorder")
 
   @@index([status])
   @@index([role])
@@ -136,14 +140,16 @@ model Marriage {
 
 model Event {
   id           String   @id @default(cuid())
-  memberId     String
+  /// Có thể bỏ trống: sự kiện chung của cả dòng họ (giỗ tổ, họp họ...)
+  memberId     String?
   title        String
   date         String?
   calendarType String?  @default("solar") // "solar" | "lunar"
   description  String?
+  location     String?
   createdAt    DateTime @default(now())
 
-  member Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  member Member? @relation(fields: [memberId], references: [id], onDelete: Cascade)
 
   @@index([memberId])
 }
@@ -155,14 +161,75 @@ model Photo {
   caption      String?
   isProfile    Boolean  @default(false)
   uploadedById String?
+  albumId      String?
   takenAt      String?
   createdAt    DateTime @default(now())
 
   member     Member? @relation(fields: [memberId], references: [id], onDelete: Cascade)
   uploadedBy User?   @relation("PhotoUploader", fields: [uploadedById], references: [id], onDelete: SetNull)
+  album      Album?  @relation(fields: [albumId], references: [id], onDelete: SetNull)
 
   @@index([memberId])
+  @@index([albumId])
   @@index([createdAt])
+}
+
+/// Album ảnh của dòng họ (giỗ tổ 2025, họp họ, xây từ đường...)
+model Album {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  eventDate   String?
+  coverUrl    String?
+  createdById String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  photos    Photo[]
+  createdBy User?   @relation("AlbumCreator", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+}
+
+/// Một đợt đóng góp / quỹ của dòng họ
+model Fund {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  year         Int?
+  targetAmount Int?
+  isOpen       Boolean  @default(true)
+  createdById  String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  contributions Contribution[]
+  createdBy     User?          @relation("FundCreator", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+}
+
+/// Một dòng trong sổ đóng góp
+model Contribution {
+  id              String   @id @default(cuid())
+  fundId          String
+  /// Người trong gia phả (nếu chọn được), có thể bỏ trống
+  memberId        String?
+  contributorName String
+  amount          Int
+  paidAt          String?
+  method          String?  // "cash" | "transfer"
+  note            String?
+  recordedById    String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  fund       Fund    @relation(fields: [fundId], references: [id], onDelete: Cascade)
+  member     Member? @relation("MemberContributions", fields: [memberId], references: [id], onDelete: SetNull)
+  recordedBy User?   @relation("ContributionRecorder", fields: [recordedById], references: [id], onDelete: SetNull)
+
+  @@index([fundId])
+  @@index([memberId])
 }
 
 /// Bài đăng trên feed dòng họ

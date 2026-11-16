@@ -65,6 +65,12 @@ export async function Header() {
                   Ảnh
                 </Link>
                 <Link
+                  href="/quy-ho"
+                  className="text-sm font-medium text-gray-600 hover:text-[#8b4513] transition-colors"
+                >
+                  Quỹ Họ
+                </Link>
+                <Link
                   href="/chat"
                   className="text-sm font-medium text-gray-600 hover:text-[#8b4513] transition-colors"
                 >

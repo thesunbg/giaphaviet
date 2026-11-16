@@ -1,6 +1,5 @@
 import { getCurrentUser, getViewer } from "@/lib/user-auth";
-import { GalleryClient } from "@/components/photos/gallery-client";
-
+import { AlbumsClient } from "@/components/photos/albums-client";
 import { NeedAccount } from "@/components/layout/need-account";
 
 export const dynamic = "force-dynamic";
@@ -15,5 +14,5 @@ export default async function GalleryPage() {
     );
   }
 
-  return <GalleryClient currentUser={{ id: user.id, name: user.name, role: user.role }} />;
+  return <AlbumsClient />;
 }
